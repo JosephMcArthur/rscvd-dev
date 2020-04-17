@@ -1,7 +1,3 @@
----
-layout: default
----
-
 ## FAQ
 
 Last updated: April 15, 2020
