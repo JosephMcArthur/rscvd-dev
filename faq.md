@@ -1,3 +1,7 @@
+---
+layout: faq
+---
+
 ## FAQ
 
 Last updated: April 15, 2020
