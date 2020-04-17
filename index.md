@@ -1,2 +1,2 @@
-<script src="https://dev.openaccessbutton.org/static/instantill.js"></script><script>instantill({uid:"4pFztJmoMzzubT3HR",api:"https://dev.api.cottagelabs.com/service/oab"});</script>
+<script src="https://openaccessbutton.org/static/instantill.js"></script><script>instantill({uid:"ivSJpXG4euYTqhciz"});</script>
 <div id="instantill"></div>
