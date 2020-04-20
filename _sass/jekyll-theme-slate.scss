@@ -390,6 +390,10 @@ Full-Width Styles
     border-radius: 4px;
 }
 
+.oabutton_form:focus{
+    border:2px solid #00492c;
+  }
+
 .oabutton_ill {
   color:#FFF;
   display: inline-block;
