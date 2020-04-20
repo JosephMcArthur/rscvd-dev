@@ -4,60 +4,71 @@ layout: form
 
 <h1>Book Chapter Request</h1>
 
-
-<form id="test-form">
-
 <label>Book Title</label>
-<p><input class="oabutton_form" type="text" name="title" placeholder="Biology for dummies" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="title" placeholder="Biology for dummies" style="box-shadow:none;"></p>
 
 <p>ISBN</p>
-<p><input class="oabutton_form" type="text" name="ISBN" placeholder="e.g 978-3-16-148410-0" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="ISBN" placeholder="e.g 978-3-16-148410-0" style="box-shadow:none;"></p>
 
 <p>Authors</p>
-<p><input class="oabutton_form" type="text" name="authors" placeholder="e.g 1" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="authors" placeholder="e.g 1" style="box-shadow:none;"></p>
 
 <p>Edition</p>
-<p><input class="oabutton_form" type="text" name="edition" placeholder="e.g Joseph McArthur" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="edition" placeholder="e.g Joseph McArthur" style="box-shadow:none;"></p>
 
 <p>Year Published</p>
-<p><input class="oabutton_form" type="text" name="year" placeholder="e.g 1992" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="year" placeholder="e.g 1992" style="box-shadow:none;"></p>
 
 <p>Institutional Email Address</p>
-<p><input class="oabutton_form" type="text" name="email" placeholder="e.g. your.email@institution.edu" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="email" placeholder="e.g. your.email@institution.edu" style="box-shadow:none;"></p>
 
 <p>Full Name</p>
-<p><input class="oabutton_form" type="text" name="name" placeholder="e.g. Joseph McArthur" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="name" placeholder="e.g. Joseph McArthur" style="box-shadow:none;"></p>
 
 <p>Library Name</p>
-<p><input class="oabutton_form" type="text" name="library" placeholder="e.g. Harvard Library" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="library" placeholder="e.g. Harvard Library" style="box-shadow:none;"></p>
 
-<p><a class="oabutton_find" type="submit" id="submit-form" aria-label="Search" style="min-width:150px;">Submit Request</a></p>
-
-</form>
+<p><a class="oabutton_find" href="/ill-covid/thanks" id="submit" aria-label="submit" style="min-width:150px;">Submit Request</a></p>
 
 <script>
-
-// TODO: required: have seralize object work. Once this is ready /books works.
-// TODO: required: have url params data submitted. Once this is ready /submit works.
-// TODO: Not needed quiet yet: should / can we have the url param's fill boxes on the page (where they are names / ids? This might make /submit nicer.)
-
-// sheet with responses is here: https://docs.google.com/spreadsheets/d/1EFrF9TIeDWM8rv1UBYHijacExAc4fYgm7cGxpMla4h4/edit#gid=0
-
 jQuery(document).ready(function() {
-  var $form = $('form#test-form'),
-      url = '      https://script.google.com/macros/s/AKfycbwPq7xWoTLwnqZHv7gJAwtsHRkreJ1hMJVeeplxDG_MipdIamU6/exec'
-  $('#submit-form').on('click', function(e) {
-    e.preventDefault();
-    var jqxhr = $.ajax({
+
+  var url = 'https://script.google.com/macros/s/AKfycbwPq7xWoTLwnqZHv7gJAwtsHRkreJ1hMJVeeplxDG_MipdIamU6/exec'; // this will be the google script url like 'https://script.google.com/macros/s/abcdefghijklmnopqrstuvwxyz1234567890/exec'
+
+  var goto = false;
+  var submit = function(e) {
+    try { e.preventDefault(); } catch(err) {};
+    var data = {};
+
+    $('.oabutton_form').each(function() {
+      data[$(this).attr('id')] = $(this).val();
+    });
+
+    if (window.location.search) {
+      var s = window.location.search.split('?')[1];
+      var params = s.split('&');
+      for ( var p of params ) {
+        var parts = p.split('=');
+        if (parts.length === 2) data[parts[0]] = parts[1];
+      }
+    }
+
+    goto = $(this).attr('href');
+    console.log(data);
+    $.ajax({
       url: url,
-      method: "GET",
-      dataType: "json",
-      data: $form.serializeObject()
-    }).success(
-      // do something
-      // joe tries to send to thanks page
-      $(location).attr('href', '/ill-covid/thanks')
-    );
-  })
+      method: 'GET',
+      dataType: 'json',
+      data: data,
+      success: function(res) {
+        console.log(res);
+        window.location = goto;
+      }
+    });
+
+  }
+
+  $('body').on('click','#submit',submit);
+
 });
 </script>
