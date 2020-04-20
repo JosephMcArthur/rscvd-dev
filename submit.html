@@ -47,8 +47,9 @@ jQuery(document).ready(function() {
       method: 'GET',
       dataType: 'json',
       data: data,
-      success: function() {
-        window.location = goto;
+      success: function(res) {
+        //window.location = goto;
+        console.log(res)
       }
     });
 
