@@ -10,26 +10,26 @@ We've got all the information we need about what you need.
 <p><input class="oabutton_form" type="text" id="email" placeholder="e.g. your.email@institution.edu" style="box-shadow:none;"></p>
 
 <p>Full Name</p>
-<p><input class="oabutton_form" type="text" id="full name" placeholder="e.g. Joseph McArthur" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="name" placeholder="e.g. Joseph McArthur" style="box-shadow:none;"></p>
 
 <p>Library Name</p>
-<p><input class="oabutton_form" type="text" id="library name" placeholder="e.g. Harvard Library" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" id="library" placeholder="e.g. Harvard Library" style="box-shadow:none;"></p>
 
 <p><a class="oabutton_find" href="/thanks" id="submit" aria-label="submit" style="min-width:150px;">Submit Request</a></p>
 
 <script>
 jQuery(document).ready(function() {
 
-  var url = ''; // this will be the google script url like 'https://script.google.com/macros/s/abcdefghijklmnopqrstuvwxyz1234567890/exec'
+  var url = 'https://script.google.com/macros/s/AKfycbwPq7xWoTLwnqZHv7gJAwtsHRkreJ1hMJVeeplxDG_MipdIamU6/exec'; // this will be the google script url like 'https://script.google.com/macros/s/abcdefghijklmnopqrstuvwxyz1234567890/exec'
 
   var submit = function(e) {
     try { e.preventDefault(); } catch(err) {};
     var data = {};
-    
+
     $('.oabutton_form').each(function() {
       data[$(this).attr('id')] = $(this).val();
     });
-    
+
     if (window.location.search) {
       var s = window.location.search.split('?')[1];
       var params = s.split('&');
@@ -38,14 +38,14 @@ jQuery(document).ready(function() {
         if (parts.length === 2) data[parts[0]] = parts[1];
       }
     }
-    
+
     $.ajax({
       url: '',
       method: 'GET',
       dataType: 'json',
       data: data
     });
-    
+
     window.location = $(this).attr('href');
   }
 
@@ -53,4 +53,3 @@ jQuery(document).ready(function() {
 
 });
 </script>
-
