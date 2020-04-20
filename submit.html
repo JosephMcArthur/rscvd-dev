@@ -22,6 +22,7 @@ jQuery(document).ready(function() {
 
   var url = 'https://script.google.com/macros/s/AKfycbwPq7xWoTLwnqZHv7gJAwtsHRkreJ1hMJVeeplxDG_MipdIamU6/exec'; // this will be the google script url like 'https://script.google.com/macros/s/abcdefghijklmnopqrstuvwxyz1234567890/exec'
 
+  var goto = false;
   var submit = function(e) {
     try { e.preventDefault(); } catch(err) {};
     var data = {};
@@ -39,14 +40,18 @@ jQuery(document).ready(function() {
       }
     }
 
+    goto = $(this).attr('href');
+    console.log(data);
     $.ajax({
       url: url,
       method: 'GET',
       dataType: 'json',
-      data: data
+      data: data,
+      success: function() {
+        window.location = goto;
+      }
     });
 
-    window.location = $(this).attr('href');
   }
 
   $('body').on('click','#submit',submit);
