@@ -15,13 +15,13 @@ We've got all the information we need about what you need.
 <p>Library Name</p>
 <p><input class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard Library" style="box-shadow:none;"></p>
 
-<p><a class="oabutton_find" href="thanks" id="submit" aria-label="submit" style="min-width:150px;">Submit Request</a></p>
+<p><a class="oabutton_find" href="/ill-covid/thanks" id="submit" aria-label="submit" style="min-width:150px;">Submit Request</a></p>
+
 
 <script>
 jQuery(document).ready(function() {
 
-  //var url = 'https://api.openaccessbutton.org/ill/collect'
-  var url = 'https://script.google.com/macros/s/AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU/exec'
+  var url = 'https://script.google.com/macros/s/AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU/exec'; // this will be the google script url like 'https://script.google.com/macros/s/abcdefghijklmnopqrstuvwxyz1234567890/exec'
 
   var goto = false;
   var submit = function(e) {
@@ -37,7 +37,7 @@ jQuery(document).ready(function() {
       var params = s.split('&');
       for ( var p of params ) {
         var parts = p.split('=');
-        if (parts.length === 2 && parts[0] !== 'nothanks') data[parts[0]] = parts[1];
+        if (parts.length === 2) data[parts[0]] = parts[1];
       }
     }
 
@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
       data: data,
       success: function(res) {
         console.log(res);
-        if (window.location.search.indexOf('nothanks') === -1) window.location = goto;
+        window.location = goto;
       }
     });
 
