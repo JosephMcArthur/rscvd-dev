@@ -26,10 +26,10 @@ layout: form
 <p><input class="oabutton_form" type="text" name="email" placeholder="e.g. your.email@institution.edu" style="box-shadow:none;"></p>
 
 <p>Full Name</p>
-<p><input class="oabutton_form" type="text" name="full name" placeholder="e.g. Joseph McArthur" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" name="name" placeholder="e.g. Joseph McArthur" style="box-shadow:none;"></p>
 
 <p>Library Name</p>
-<p><input class="oabutton_form" type="text" name="library name" placeholder="e.g. Harvard Library" style="box-shadow:none;"></p>
+<p><input class="oabutton_form" type="text" name="library" placeholder="e.g. Harvard Library" style="box-shadow:none;"></p>
 
 <p><a class="oabutton_find" type="submit" id="submit-form" aria-label="Search" style="min-width:150px;">Submit Request</a></p>
 
@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
       url: url,
       method: "GET",
       dataType: "json",
-      data: $form.serialize()
+      data: $form.serializeObject()
     }).success(
       // do something
       // joe tries to send to thanks page
