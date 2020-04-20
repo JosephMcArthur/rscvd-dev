@@ -51,6 +51,10 @@ jQuery(document).ready(function() {
         //window.location = goto;
         console.log(res);
         console.log(res.toString());
+      },
+      error: function(err) {
+        console.log(err);
+        console.log(err.toString());
       }
     });
 
