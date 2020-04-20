@@ -49,6 +49,8 @@ jQuery(document).ready(function() {
       data: $form.serializeObject()
     }).success(
       // do something
+      // joe tries to send to thanks page
+      $(location).attr('href', '/thanks')
     );
   })
 });
