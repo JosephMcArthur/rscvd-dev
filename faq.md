@@ -26,4 +26,4 @@ The service is free of charge for borrowing libraries since this is a temporary 
 We will try to supply the item as soon as possible. If we cannot find an available item within one week, we will send you a notification.
 
 ### Who should you contact if you have other questions?
-Please use IFLADDRS@gmail.com to ask other questions.
+Please use ifladdrs@gmail.com to ask other questions.
