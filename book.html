@@ -38,7 +38,7 @@ layout: form
 <script>
 jQuery(document).ready(function() {
 
-  var sid = 'ADD SCRIPT ID HERE';
+  var sid = 'AKfycbwPq7xWoTLwnqZHv7gJAwtsHRkreJ1hMJVeeplxDG_MipdIamU6';
   var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
 
   var goto = false;
@@ -48,18 +48,18 @@ jQuery(document).ready(function() {
       valid = undefined; // reset validity check and let the form continue to display warning
     } else {
       try { e.preventDefault(); } catch(err) {};
-  
+
       valid = $('#submission')[0].checkValidity();
       if (!valid) {
         $('#submit').click(); // will run again, but this time skip to letting the form display warning
       } else {
         // form valid now, send the data and go to thanks
         var data = {};
-    
+
         $('.oabutton_form').each(function() {
           data[$(this).attr('id')] = $(this).val();
         });
-    
+
         if (window.location.search) {
           var s = window.location.search.split('?')[1];
           var params = s.split('&');
@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
             if (parts.length === 2 && parts[0] !== 'nothanks') data[parts[0]] = parts[1];
           }
         }
-    
+
         goto = $(this).attr('href');
         console.log(data);
         $.ajax({
