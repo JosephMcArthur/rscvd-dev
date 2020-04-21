@@ -25,5 +25,14 @@ The service is free of charge for borrowing libraries since this is a temporary 
 ### How long will it take to get a requested item?
 We will try to supply the item as soon as possible. If we cannot find an available item within one week, we will send you a notification.
 
+### How long with this last?
+
+This service is a pilot project run by and dependent upon volunteers. Our intention is to continue this service for at least as long as access to library collections is restricted in any part of the world. The expectation is to maintain this service through August 31, 2020, at which point it will be reviewed based on three criteria:
+
+1. Do current global conditions allow librarians to access collections and resume normal information delivery services?
+2. Was this service able to successfully deliver resources to those in need?
+3. Do we have volunteers that are willing to continue to participate in the program?
+
+
 ### Who should you contact if you have other questions?
 Please use ifladdrs@gmail.com to ask other questions.

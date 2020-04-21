@@ -8,14 +8,17 @@ We've got all the information we need about what you need.
 
 <form id="submission">
 
-<label>Institutional Email Address</label>
+<label>Institutional Email Address (Required)</label>
 <p><input required="required" class="oabutton_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
 
-<label>Full Name</label>
+<label>Full Name (Required)</label>
 <p><input required="required" class="oabutton_form" type="text" id="name" placeholder="e.g. Carla Hayden"></p>
 
-<label>Library Name</label>
+<label>Library Name (Required)</label>
 <p><input required="required" class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
+
+<label>Notes</label>
+<p><input class="oabutton_form" type="text" id="other" placeholder="e.g. Please proccess quickly!"></p>
 
 <input class="oabutton_find" href="thanks" id="submit" aria-label="submit" style="min-width:150px;" type="submit">
 
@@ -26,7 +29,7 @@ jQuery(document).ready(function() {
 
   var sid = 'AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU';
   var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
-  var fields = ["atitle","title","issn","publisher","aulast","date","volume","issue","pages","doi","pmid","pmcid","notes","crossref_type","url","where","year","email","name","organization"];
+  var fields = ["atitle","title","issn","publisher","aulast","date","volume","issue","pages","doi","pmid","pmcid","notes","crossref_type","url","where","year","email","name","organization","other"];
 
   var goto = false;
   var valid = undefined;
