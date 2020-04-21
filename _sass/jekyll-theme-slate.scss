@@ -345,22 +345,6 @@ Full-Width Styles
   padding-top: 40px;
 }
 
-#alert_content_wrap {
-  background: #f0edd4;
-}
-
-#alert_content {
-  text-align: center;
-}
-
-#alert_content .inner {
-  text-align: center;
-  position: relative;
-  max-width: 640px;
-  padding: 5px;
-  margin: 0 auto;
-}
-
 #footer_wrap {
   background: #009194;
 }
@@ -419,6 +403,18 @@ Full-Width Styles
   border: 1px solid transparent;
   border-radius: 4px;
   background-color: #00492c;
+}
+
+#alert_content_wrap {
+  background: #f0edd4;
+}
+
+#alert_content .inner {
+  text-align: center;
+  position: relative;
+  max-width: 640px;
+  padding: 5px;
+  margin: 0 auto;
 }
 
 /*******************************************************************************
