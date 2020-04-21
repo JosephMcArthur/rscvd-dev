@@ -22,59 +22,68 @@ layout: form
 <p><input class="oabutton_form" type="text" id="year" placeholder="e.g 1992"></p>
 
 <label>Institutional Email Address</label>
-<p><input  required="required" class="oabutton_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
+<p><input required="required" class="oabutton_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
 
 <label>Full Name</label>
-<p><input  required="required" class="oabutton_form" type="text" id="name" placeholder="e.g. Carla Hayden"></p>
+<p><input required="required" class="oabutton_form" type="text" id="name" placeholder="e.g. Carla Hayden"></p>
 
 <label>Library Name</label>
-<p><input  required="required" class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
+<p><input required="required" class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
 
-<input class="oabutton_find" href="/ill-covid/thanks" id="submit" aria-label="submit" style="min-width:150px;" type="submit">
+<input class="oabutton_find" href="thanks" id="submit" aria-label="submit" style="min-width:150px;" type="submit">
 <!-- TODO: Joe: does stopping default on this stop built in browser validation? https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/required / https://css-tricks.com/form-validation-ux-html-css/ -->
 
 </form>
 
-<!-- below is from https://medium.com/@dmccoy/how-to-submit-an-html-form-to-google-sheets-without-google-forms-b833952cc175 -->
-
 <script>
 jQuery(document).ready(function() {
 
-  var url = 'https://api.openaccessbutton.org/ill/collect'; // this will be the google script url like 'https://script.google.com/macros/s/abcdefghijklmnopqrstuvwxyz1234567890/exec'
+  var sid = 'ADD SCRIPT ID HERE';
+  var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
 
   var goto = false;
+  var valid = undefined;
   var submit = function(e) {
-    try { e.preventDefault(); } catch(err) {};
-    var data = {};
-
-    $('.oabutton_form').each(function() {
-      data[$(this).attr('id')] = $(this).val();
-    });
-
-    if (window.location.search) {
-      var s = window.location.search.split('?')[1];
-      var params = s.split('&');
-      for ( var p of params ) {
-        var parts = p.split('=');
-        if (parts.length === 2) data[parts[0]] = parts[1];
+    if (valid === false) {
+      valid = undefined; // reset validity check and let the form continue to display warning
+    } else {
+      try { e.preventDefault(); } catch(err) {};
+  
+      valid = $('#submission')[0].checkValidity();
+      if (!valid) {
+        $('#submit').click(); // will run again, but this time skip to letting the form display warning
+      } else {
+        // form valid now, send the data and go to thanks
+        var data = {};
+    
+        $('.oabutton_form').each(function() {
+          data[$(this).attr('id')] = $(this).val();
+        });
+    
+        if (window.location.search) {
+          var s = window.location.search.split('?')[1];
+          var params = s.split('&');
+          for ( var p of params ) {
+            var parts = p.split('=');
+            if (parts.length === 2) data[parts[0]] = parts[1];
+          }
+        }
+    
+        goto = $(this).attr('href');
+        console.log(data);
+        $.ajax({
+          url: url,
+          method: 'GET',
+          dataType: 'json',
+          data: data,
+          success: function(res) {
+            console.log(res);
+            window.location = goto;
+          }
+        });
       }
     }
-
-    goto = $(this).attr('href');
-    console.log(data);
-    $.ajax({
-      url: url,
-      method: 'GET',
-      dataType: 'json',
-      data: data,
-      success: function(res) {
-        console.log(res);
-        window.location = goto;
-      }
-    });
-
   }
-
   $('body').on('click','#submit',submit);
 
 });
