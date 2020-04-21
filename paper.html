@@ -4,7 +4,7 @@ layout: form
 
 <h1>Paper Request</h1>
 
-<form>
+<form id="submission">
 
 <label>Paper Title</label>
 <p><input class="oabutton_form" type="text" id="atitle" placeholder="e.g Evolutionary persistence of DNA methylation for millions of years"></p>
@@ -42,50 +42,59 @@ layout: form
 <p><input  required="required" class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
 
 <input class="oabutton_find" href="/ill-covid/thanks" id="submit" aria-label="submit" style="min-width:150px;" type="submit">
-<!-- TODO: Joe: does stopping default on this stop built in browser validation? https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/required / https://css-tricks.com/form-validation-ux-html-css/ -->
 
 </form>
-
-<!-- below is from https://medium.com/@dmccoy/how-to-submit-an-html-form-to-google-sheets-without-google-forms-b833952cc175 -->
 
 <script>
 jQuery(document).ready(function() {
 
-  var url = 'https://script.google.com/macros/s/AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU/exec'; // this will be the google script url like 'https://script.google.com/macros/s/abcdefghijklmnopqrstuvwxyz1234567890/exec'
+  var sid = 'AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU';
+  var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
+  var fields = [];
 
   var goto = false;
+  var valid = undefined;
   var submit = function(e) {
-    try { e.preventDefault(); } catch(err) {};
-    var data = {};
+    if (valid === false) {
+      valid = undefined; // reset validity check and let the form continue to display warning
+    } else {
+      try { e.preventDefault(); } catch(err) {};
 
-    $('.oabutton_form').each(function() {
-      data[$(this).attr('id')] = $(this).val();
-    });
+      valid = $('#submission')[0].checkValidity();
+      if (!valid) {
+        $('#submit').click(); // will run again, but this time skip to letting the form display warning
+      } else {
+        // form valid now, send the data and go to thanks
+        var data = {};
 
-    if (window.location.search) {
-      var s = window.location.search.split('?')[1];
-      var params = s.split('&');
-      for ( var p of params ) {
-        var parts = p.split('=');
-        if (parts.length === 2) data[parts[0]] = parts[1];
+        $('.oabutton_form').each(function() {
+          if (!fields.length || fields.indexOf($(this).attr('id')) !== -1) data[$(this).attr('id')] = $(this).val();
+        });
+
+        if (window.location.search) {
+          var s = window.location.search.split('?')[1];
+          var params = s.split('&');
+          for ( var p of params ) {
+            var parts = p.split('=');
+            if (parts.length === 2 && parts[0] !== 'nothanks' && (!fields.length || fields.indexOf(parts[0]) !== -1)) data[parts[0]] = parts[1];
+          }
+        }
+
+        goto = $(this).attr('href');
+        console.log(data);
+        $.ajax({
+          url: url,
+          method: 'GET',
+          dataType: 'json',
+          data: data,
+          success: function(res) {
+            console.log(res);
+            if (window.location.search.indexOf('nothanks') === -1) window.location = goto;
+          }
+        });
       }
     }
-
-    goto = $(this).attr('href');
-    console.log(data);
-    $.ajax({
-      url: url,
-      method: 'GET',
-      dataType: 'json',
-      data: data,
-      success: function(res) {
-        console.log(res);
-        window.location = goto;
-      }
-    });
-
   }
-
   $('body').on('click','#submit',submit);
 
 });
