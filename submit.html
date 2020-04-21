@@ -26,7 +26,8 @@ jQuery(document).ready(function() {
 
   var sid = 'AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU';
   var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
-
+  var fields = [];
+  
   var goto = false;
   var valid = undefined;
   var submit = function(e) {
@@ -43,7 +44,7 @@ jQuery(document).ready(function() {
         var data = {};
     
         $('.oabutton_form').each(function() {
-          data[$(this).attr('id')] = $(this).val();
+          if (!fields.length || fields.indexOf($(this).attr('id')) !== -1) data[$(this).attr('id')] = $(this).val();
         });
     
         if (window.location.search) {
@@ -51,7 +52,7 @@ jQuery(document).ready(function() {
           var params = s.split('&');
           for ( var p of params ) {
             var parts = p.split('=');
-            if (parts.length === 2 && parts[0] !== 'nothanks') data[parts[0]] = parts[1];
+            if (parts.length === 2 && parts[0] !== 'nothanks' && (!fields.length || fields.indexOf(parts[0]) !== -1)) data[parts[0]] = parts[1];
           }
         }
     
