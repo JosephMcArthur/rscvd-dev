@@ -353,6 +353,14 @@ Full-Width Styles
   text-align: center;
 }
 
+#alert_content .inner {
+  text-align: center;
+  position: relative;
+  max-width: 640px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
 #footer_wrap {
   background: #009194;
 }
