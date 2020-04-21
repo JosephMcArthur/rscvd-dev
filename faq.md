@@ -1,6 +1,9 @@
 ---
 layout: faq
 ---
+### I have feedback, where can I send it?
+Please <a href = "mailto:ifladdrs@gmail.com">let us know</a> if you've got any feedback.
+
 ### Who can make a request?
 Only librarians who are affiliated with Academic, Public, or Special libraries at not-for-profit institutions can make a request.
 
