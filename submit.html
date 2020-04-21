@@ -51,7 +51,7 @@ jQuery(document).ready(function() {
           var params = s.split('&');
           for ( var p of params ) {
             var parts = p.split('=');
-            if (parts.length === 2) data[parts[0]] = parts[1];
+            if (parts.length === 2 && parts[0] !== 'nothanks') data[parts[0]] = parts[1];
           }
         }
     
@@ -64,7 +64,7 @@ jQuery(document).ready(function() {
           data: data,
           success: function(res) {
             console.log(res);
-            window.location = goto;
+            if (window.location.search.indexOf('nothanks') === -1) window.location = goto;
           }
         });
       }
