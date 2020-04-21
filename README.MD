@@ -7,6 +7,5 @@ Changes should be tested here, then moved to the other repo.
 When that happens, make sure it:
 
 * Unhide the live embed
-* remove /ill-covid from links
 * adjust the live embed as required
 * make sure to not delete the cname :)
