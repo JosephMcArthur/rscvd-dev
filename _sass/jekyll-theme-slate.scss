@@ -272,7 +272,6 @@ Full-Width Styles
   color: #00492c;
   background: #fff no-repeat 95% 50%;
   font-weight: 700;
-  box-shadow: 0 0 10px rgba(0,0,0,.5);
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 }
@@ -340,8 +339,6 @@ Full-Width Styles
 
 #main_content_wrap {
   background: #f0edd4;
-  border-top: 1px solid #111;
-  border-bottom: 1px solid #111;
 }
 
 #main_content {
@@ -406,6 +403,18 @@ Full-Width Styles
   border: 1px solid transparent;
   border-radius: 4px;
   background-color: #00492c;
+}
+
+#alert_content_wrap {
+  background: #f0edd4;
+}
+
+#alert_content .inner {
+  text-align: center;
+  position: relative;
+  max-width: 640px;
+  padding: 5px;
+  margin: 0 auto;
 }
 
 /*******************************************************************************
