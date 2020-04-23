@@ -41,6 +41,8 @@ jQuery(document).ready(function() {
         $('#submit').click(); // will run again, but this time skip to letting the form display warning
       } else {
         // form valid now, send the data and go to thanks
+        $('#submit').replaceWith('<p>Submitting...</p>');
+        
         var data = {};
     
         $('.oabutton_form').each(function() {
