@@ -5,7 +5,7 @@ layout: faq
 Please <a href = "mailto:ifladdrs@gmail.com">let us know</a> if you've got any feedback.
 
 ### Who can make a request?
-Only librarians who are affiliated with Academic, Public, or Special libraries at not-for-profit institutions can make a request.
+Only librarians who are affiliated with Academic, Public, School, or Special libraries at not-for-profit institutions can make a request.
 
 ### Why do we need your institutional email address?
 Interlibrary Loan activities are transactions between established libraries. So, we need to verify that a request is from a library, not from an individual. The institutional email address is a way to verify your affiliation.
