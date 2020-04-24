@@ -49,14 +49,10 @@
           var params = s.split('&');
           for ( var p of params ) {
             var parts = p.split('=');
-            var cp = parts[0]; //.toLowerCase().replace(/ /g,'_');
-            var tp = '#';
-            var inpage = $(tp+cp).length;
-            /*if (!inpage) {
-              tp = '.';
-              inpage = $(tp+cp).length;
-            }*/
-            if (parts.length === 2 && parts[0] !== 'nothanks' && inpage) $(tp+cp).val(decodeURIComponent(parts[1]));
+            var cp = parts[0];
+            if (cp.length && parts.length === 2 && parts[0] !== 'nothanks' && $('#'+cp).length) {
+              $('#'+cp).val(decodeURIComponent(parts[1]));
+            }
           }
         }
       }
