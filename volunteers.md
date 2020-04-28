@@ -2,11 +2,11 @@
 layout: volunteers
 ---
 
-The RSCVD initiative is made available by the [IFLA Document Delivery and Resource Sharing Standing Committee](https://www.ifla.org/docdel) and generous help of volunteers around the world. In particular, Joe McArthur and the [Open Access Button](https://openaccessbutton.org) have provided valuable supports on creating the web page and the request form. The Open Access Button allows librarians to find materials they are looking for even without making the request.
+As the number of requests grows every hour, we need your help more than ever.
 
-We sincerely appreciate volunteers for their time and expertise. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com). As the number of requests grows every hour, we need your help more than ever.
+The RSCVD initiative is made available by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time and expertise. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
 
-Below is the list of volunteers as of April 27th, 2020. And the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) are also providing their expertise for starting and promoting the initiative and subsequently their resources for providing the materials requested.
+Below is the list of volunteers as of April 28th, 2020.
 
 **First Name**|**Second Name**|**Library**|**Country**
 :-----:|:-----:|:-----:|:-----:
@@ -41,3 +41,7 @@ Banu|Tunalı|Ozyegin University Library|Turkey
 Burak|Kazlı|Ozyegin University Library|Turkey
 Hakan|Kiran|Bilgi Merkezi, Kadir Has Üniversitesi|Turkey
 Kathalin|Haldeman|Boston University School of Law|US
+
+Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
+
+Finally, Joe McArthur and the [Open Access Button](https://openaccessbutton.org) have provided valuable support on creating the website and the request form using [InstantILL](htttps://instantill.org). The Open Access Button allows librarians to find materials they are looking for even without making a request.
