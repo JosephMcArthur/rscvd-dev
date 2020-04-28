@@ -2,9 +2,7 @@
 layout: volunteers
 ---
 
-As the number of requests grows every hour, we need your help more than ever.
-
-The RSCVD initiative is made available by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time and expertise. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
+The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
 
 Below is the list of volunteers as of April 28th, 2020.
 
