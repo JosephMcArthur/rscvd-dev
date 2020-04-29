@@ -40,7 +40,7 @@ Burak|Kazlı|Ozyegin University Library|Turkey
 Hakan|Kiran|Bilgi Merkezi, Kadir Has Üniversitesi|Turkey
 Kathalin|Haldeman|Boston University School of Law|US
 Jade|Ward|Leeds University Library|UK
-Eddie	Whitaker|Leeds University Library|UK
+Eddie|Whitaker|Leeds University Library|UK
 Sarah|Sykes|Leeds University Library|UK
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
