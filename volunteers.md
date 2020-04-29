@@ -25,7 +25,7 @@ Kerry Kristine|McElrone|Swarthmore College|US
 Beth|Parry|Leeds University Library|UK
 Triza|Crittle|National Agricultural Library|US
 Meg|Massey|Penn State University Libraries|US
-Loriana|Maimone Ansaldo Patti|Università degli Studi di Messina|US
+Loriana|Maimone Ansaldo Patti|Università degli Studi di Messina|Italy
 Megan|Gaffney|University of Delaware Library|US
 Hilary|Thompson|University of Maryland Libraries|US
 Sofiya|Petrova Dahman|University of Memphis|US
