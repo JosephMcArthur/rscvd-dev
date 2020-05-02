@@ -44,6 +44,8 @@ Eddie|Whitaker|Leeds University Library|UK
 Sarah|Sykes|Leeds University Library|UK
 Lisa|Roulstone|University of Canberra Library|Australia
 Lauren|Levinson|Drew University Library|US
+Lucía Meijueiro|Barros|Manchester Metropolitan University|UK
+
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
