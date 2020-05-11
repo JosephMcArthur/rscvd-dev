@@ -62,6 +62,9 @@ Mia|Partlow|NC State University Libraries|US
 Leslie|Shaip|NC State University Libraries|US
 Kyla|O'Hara|Towson University, Albert S. Cook Library|US
 Joe|Gutekanst|Davidson College Library|US
+Katia|Medawar|Qatar National Library|US	
+Blessing|Chiparausha|Bindura University of Science Education|Zimbabwe
+Zaida|Sánchez Terrer|Universidad de Murcia|
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
