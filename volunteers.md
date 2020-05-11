@@ -4,7 +4,7 @@ layout: volunteers
 
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
 
-Below is the list of volunteers as of May 9th, 2020.
+Below is the list of volunteers as of May 11th, 2020.
 
 **First Name**|**Second Name**|**Library**|**Country**
 :-----:|:-----:|:-----:|:-----:
@@ -62,7 +62,7 @@ Mia|Partlow|NC State University Libraries|US
 Leslie|Shaip|NC State University Libraries|US
 Kyla|O'Hara|Towson University, Albert S. Cook Library|US
 Joe|Gutekanst|Davidson College Library|US
-Katia|Medawar|Qatar National Library|US	
+Katia|Medawar|Qatar National Library|US
 Blessing|Chiparausha|Bindura University of Science Education|Zimbabwe
 Zaida|Sánchez Terrer|Universidad de Murcia|
 
