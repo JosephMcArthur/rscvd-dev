@@ -4,7 +4,7 @@ layout: volunteers
 
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
 
-Below is the list of volunteers as of May 14th, 2020.
+Below is the list of volunteers as of May 15th, 2020.
 
 **First Name**|**Second Name**|**Library**|**Country**
 :-----:|:-----:|:-----:|:-----:
@@ -78,6 +78,11 @@ Erika|McNeil|University of Connecticut|US
 Marios|Zervas|Cyprus University of Technology|Cyprus
 David|Fernández Lora|Universidad Pablo de Olavide|Spain
 Aimee|Lind|Getty Research Institute|US
+Semih|Bostan|Hacettepe University|Turkey
+Annette|Medhus|Oslo School of Architecture and Design|Norway
+Pablo|Santos|Universidade da Coruña Library|Spain
+Stefania|Manzo|Biblioteca della Scuola Normale Superiore|Italy
+Kate|Zdepski|University of Massachusetts, Amherst|US
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
