@@ -85,12 +85,12 @@ Kate|Zdepski|University of Massachusetts, Amherst|US
 Moreno|Barros|Technology Center at Universidade Federal do Rio de Janeiro|Brazil
 Lyudmila|Baranova|Imperial College London (Central Library)|UK
 James|Broomhall|Swansea University|UK
-Geraldine|Farrell|Imperial College London(Hammersmith Campus Library)|UK
+Geraldine|Farrell|Imperial College London (Hammersmith Campus Library)|UK
 Charlotte|Jackson|Brooklyn College Library|US
 Rowena|Acquino|Qatar National Library|Qatar
-Rebecca|Jones|Imperial College London(Charing Cross Campus Library)|UK
-Alice|Lowry|Imperial College London(Charing Cross Campus Library)|UK
-Andrea|Mercier|Imperial College London(Charing Cross Campus Library)|UK
+Rebecca|Jones|Imperial College London (Charing Cross Campus Library)|UK
+Alice|Lowry|Imperial College London (Charing Cross Campus Library)|UK
+Andrea|Mercier|Imperial College London (Charing Cross Campus Library)|UK
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
