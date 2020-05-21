@@ -87,7 +87,7 @@ Lyudmila|Baranova|Imperial College London (Central Library)|UK
 James|Broomhall|Swansea University|UK
 Geraldine|Farrell|Imperial College London(Hammersmith Campus Library)|UK
 Charlotte|Jackson|Brooklyn College Library|US
-Rowena|Acquino}|Qatar National Library|Qatar
+Rowena|Acquino|Qatar National Library|Qatar
 Rebecca|Jones|Imperial College London(Charing Cross Campus Library)|UK
 Alice|Lowry|Imperial College London(Charing Cross Campus Library)|UK
 Andrea|Mercier|Imperial College London(Charing Cross Campus Library)|UK
