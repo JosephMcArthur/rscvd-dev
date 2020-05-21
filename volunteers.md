@@ -4,7 +4,7 @@ layout: volunteers
 
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
 
-Below is the list of volunteers as of May 19th, 2020.
+Below is the list of volunteers as of May 21th, 2020.
 
 **First Name**|**Second Name**|**Library**|**Country**
 :-----:|:-----:|:-----:|:-----:
@@ -62,7 +62,7 @@ Mia|Partlow|NC State University Libraries|US
 Leslie|Shaip|NC State University Libraries|US
 Kyla|O'Hara|Towson University, Albert S. Cook Library|US
 Joe|Gutekanst|Davidson College Library|US
-Katia|Medawar|Qatar National Library|US
+Katia|Medawar|Qatar National Library|Qatars
 Blessing|Chiparausha|Bindura University of Science Education|Zimbabwe
 Zaida|Sánchez Terrer|Universidad de Murcia|
 Mallikarjun|Dora|Vikram Sarabhai Library, IIM Ahmedabad|India
@@ -83,7 +83,14 @@ Pablo|Santos|Universidade da Coruña Library|Spain
 Stefania|Manzo|Biblioteca della Scuola Normale Superiore|Italy
 Kate|Zdepski|University of Massachusetts, Amherst|US
 Moreno|Barros|Technology Center at Universidade Federal do Rio de Janeiro|Brazil
-Lyudmila|Baranova|Imperial College London|UK
+Lyudmila|Baranova|Imperial College London (Central Library)|UK
+James|Broomhall|Swansea University|UK
+Geraldine|Farrell|Imperial College London(Hammersmith Campus Library)|UK
+Charlotte|Jackson|Brooklyn College Library|US
+Rowena|Acquino}|Qatar National Library|Qatar
+Rebecca|Jones|Imperial College London(Charing Cross Campus Library)|UK
+Alice|Lowry|Imperial College London(Charing Cross Campus Library)|UK
+Andrea|Mercier|Imperial College London(Charing Cross Campus Library)|UK
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
