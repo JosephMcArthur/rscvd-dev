@@ -64,7 +64,7 @@ Kyla|O'Hara|Towson University, Albert S. Cook Library|US
 Joe|Gutekanst|Davidson College Library|US
 Katia|Medawar|Qatar National Library|Qatars
 Blessing|Chiparausha|Bindura University of Science Education|Zimbabwe
-Zaida|Sánchez Terrer|Universidad de Murcia|
+Zaida|Sánchez Terrer|Universidad de Murcia|Spain
 Mallikarjun|Dora|Vikram Sarabhai Library, IIM Ahmedabad|India
 Severiano|Delgado Cruz|Universidad de Salamanca|Spain
 Rosa|Escobar|University of Almería-Library|Spain
