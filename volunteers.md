@@ -52,7 +52,7 @@ May|Samaha|Université Saint Joseph|Lebanon
 Veronica|Cruz|Fatima College of Health Sciences|UAE
 Ruth|Snape|Bangor University|UK
 Carmen|Lomba|Universidad de Cantabria|Spain
-Rosarii|Dunne	rdunne@ait.ie	Athlone Institute of Technology|Ireland
+Rosarii|Dunne|Athlone Institute of Technology|Ireland
 Ana	Sánchez|Montañés|Consejo Superior de Investigaciones Científicas|Spain
 Alison|Lampley|Purdue University Library|US
 Ann|Geht|Hazelden Betty Ford Foundation, Addiction Research Library|US
