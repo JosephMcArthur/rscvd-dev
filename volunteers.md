@@ -91,6 +91,11 @@ Rowena|Acquino|Qatar National Library|Qatar
 Rebecca|Jones|Imperial College London<br/>(Charing Cross Campus Library)|UK
 Alice|Lowry|Imperial College London<br/>(Charing Cross Campus Library)|UK
 Andrea|Mercier|Imperial College London<br/>(Charing Cross Campus Library)|UK
+Isidro|González|Universidad de Extremadura|Spain
+Jacqueline|Roach|Cardiff University|UK
+Sarah|Reid|Imperial College London<br/>(Silwood Park Campus Library)|UK
+April|Duclos|Harvard University Library|US
+Cindy|Su|Harvard University Library|US
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
