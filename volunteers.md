@@ -8,7 +8,6 @@ Below is the list of volunteers.
 
 <html>
 
-<script src="//load.sheetsu.com"></script>
 <table>
 
 <thead>
@@ -18,7 +17,7 @@ Below is the list of volunteers.
 <th><b>Country</b></th>
 </thead>
 
-<tbody sheetsu="https://sheetsu.com/apis/v1.0su/fe47679f0471" sheetsu-limit="100">
+<tbody sheetsu="https://sheetsu.com/apis/v1.0su/fe47679f0471" sheetsu-limit="100" sheetsu-ignore-case="true">
 <tr>
 <td>{{First Name}}</td>
 <td>{{Last Name}}</td>
