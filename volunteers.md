@@ -8,6 +8,7 @@ Below is the list of volunteers.
 
 <script src="//load.sheetsu.com"></script>
 
+<table>
 <table width=100%>
 <thead>
 <th><b>First Name</b></th>
