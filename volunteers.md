@@ -6,17 +6,19 @@ The RSCVD initiative is made possible by the generous help of volunteers around 
 
 Below is the list of volunteers.
 
-<script src="//load.sheetsu.com"></script>
+<html>
 
-<table>
+<script src="//load.sheetsu.com"></script>
 <table width=100%>
+
 <thead>
 <th><b>First Name</b></th>
 <th><b>Second Name</b></th>
 <th><b>Library</b></th>
 <th><b>Country</b></th>
 </thead>
-<tbody sheetsu="https://sheetsu.com/apis/v1.0su/fe47679f0471" sheetsu-limit="100" sheetsu-ignore-case="true">
+
+<tbody sheetsu="https://sheetsu.com/apis/v1.0su/fe47679f0471" sheetsu-limit="100">
 <tr>
 <td>{{First Name}}</td>
 <td>{{Last Name}}</td>
@@ -26,6 +28,7 @@ Below is the list of volunteers.
 </tbody>
 </table>
 
+</html>
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
