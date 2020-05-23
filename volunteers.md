@@ -9,7 +9,7 @@ Below is the list of volunteers.
 <html>
 
 <script src="//load.sheetsu.com"></script>
-<table width=100%>
+<table>
 
 <thead>
 <th><b>First Name</b></th>
@@ -26,6 +26,7 @@ Below is the list of volunteers.
 <td>{{Country}}</td>
 </tr>
 </tbody>
+
 </table>
 
 </html>
