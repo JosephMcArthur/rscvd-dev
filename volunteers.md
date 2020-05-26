@@ -96,6 +96,8 @@ Jacqueline|Roach|Cardiff University|UK
 Sarah|Reid|Imperial College London<br/>(Silwood Park Campus Library)|UK
 April|Duclos|Harvard University Library|US
 Cindy|Su|Harvard University Library|US
+Isabel|Escalona|Universidad de Extremadura|Spain
+Sofie|O’Shea|Swansea University|UK
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
