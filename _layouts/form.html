@@ -80,7 +80,7 @@
               var params = s.split('&');
               for ( var p of params ) {
                 var parts = p.split('=');
-                if (parts.length === 2 && parts[0] !== 'nothanks' && (!fields.length || fields.indexOf(parts[0]) !== -1)) data[parts[0]] = parts[1];
+                if (parts.length === 2 && parts[0] !== 'nothanks' && (!fields.length || fields.indexOf(parts[0]) !== -1)) data[parts[0]] = encodeURIComponent(parts[1]);
               }
             }
 
