@@ -47,8 +47,8 @@
         if (window.location.search) {
           var s = window.location.search.split('?')[1];
           var params = s.split('&');
-          for ( var p of params ) {
-            var parts = p.split('=');
+          for ( var p = 0; p < params.length; p++ ) {
+            var parts = params[p].split('=');
             var cp = parts[0];
             if (cp.length && parts.length === 2 && parts[0] !== 'nothanks' && $('#'+cp).length) {
               $('#'+cp).val(decodeURIComponent(parts[1]));
@@ -78,8 +78,8 @@
             if (window.location.search) {
               var s = window.location.search.split('?')[1];
               var params = s.split('&');
-              for ( var p of params ) {
-                var parts = p.split('=');
+              for ( var p = 0; p < params.length; p++ ) {
+                var parts = params[p].split('=');
                 if (parts.length === 2 && parts[0] !== 'nothanks' && (!fields.length || fields.indexOf(parts[0]) !== -1)) data[parts[0]] = encodeURIComponent(parts[1]);
               }
             }
