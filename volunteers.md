@@ -4,7 +4,7 @@ layout: volunteers
 
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
 
-Below is the list of volunteers as of June 12th, 2020.
+Below is the list of volunteers as of June 13th, 2020.
 
 **First Name**|**Second Name**|**Library**|**Country**
 :-----:|:-----:|:-----:|:-----:
@@ -102,6 +102,23 @@ Teresa|Sánchez-Sanz|Universidad Politécnica de Valencia|Spain
 Ruilian|Chen|Imperial College London<br/>(Royal Brompton Campus Library)|UK
 Lynda|Sadusky|Drexel University|US
 Brian|Miller|The Ohio State University|US
+Tracy|Deitrich|Penn State University Libraries|US
+Jean|Voigt|Penn State University Libraries|US
+Alissa|Mann|Penn State University Libraries|US
+Makenzie|Coduti|Penn State University Libraries|US
+Mallory|Witzig|Penn State University Libraries|US
+Barbara|Morar|Penn State University Libraries|US
+Kamber|Yilmaz|Boğaziçi University Library|Turkey
+Monica|Berzacola|Università di Verona|Italy
+Elisabetta|Tamburini|Sapienza Università di Roma|Italy
+Donella|Cioffi|Politecnico di Torino|Italy
+Giulio|Marconi|Biblioteca|Italy
+Sergio|Settembrini|Biblioteca Area di Bologna|Italy
+Giorgia|Migliorelli|CNR Biblioteca G.Marconi|Italy
+Mariaclara|Barbi|Università di Verona|Italy
+Elisabetta|Guerra|Università di Verona|Italy
+
+
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
