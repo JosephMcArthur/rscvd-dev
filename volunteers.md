@@ -117,7 +117,11 @@ Sergio|Settembrini|Biblioteca Area di Bologna|Italy
 Giorgia|Migliorelli|CNR Biblioteca G.Marconi|Italy
 Mariaclara|Barbi|Università di Verona|Italy
 Elisabetta|Guerra|Università di Verona|Italy
-
+Pepi (Josefa)|Imperial College London(Fleming Library)|UK
+Enrico|Fornoni|Università degli Studi di Brescia|Italy
+Claire|Hordern|University of Manchester Library|UK
+Martina|Hediger|Universität Zürich|Switzerland
+Stefanie|Mauritz|Cardiff University|CRDF
 
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
