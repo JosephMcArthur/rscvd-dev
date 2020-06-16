@@ -117,7 +117,7 @@ Sergio|Settembrini|Biblioteca Area di Bologna|Italy
 Giorgia|Migliorelli|CNR Biblioteca G.Marconi|Italy
 Mariaclara|Barbi|Università di Verona|Italy
 Elisabetta|Guerra|Università di Verona|Italy
-Pepi (Josefa)|Imperial College London(Fleming Library)|UK
+Pepi (Josefa)|Sevilla|Imperial College London(Fleming Library)|UK
 Enrico|Fornoni|Università degli Studi di Brescia|Italy
 Claire|Hordern|University of Manchester Library|UK
 Martina|Hediger|Universität Zürich|Switzerland
