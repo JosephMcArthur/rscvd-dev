@@ -1,11 +1,7 @@
 ---
 layout: volunteers
-first.name: {{First.Name}}
-start: {{
-end: }}
 ---
-v1.2
-
+<!-- Try this https://medium.com/@stvhwrd/embedding-a-google-sheet-as-an-html-table-365306d2ec2c -->
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
 
 <table>
