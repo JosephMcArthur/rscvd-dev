@@ -8,27 +8,30 @@ layout: form
 
 <h1>About you</h1>
 
-<label>Institutional Email Address</label>
-<p><input required="required" class="oabutton_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
+<label>First Name</label>
+<p><input required="required" class="oabutton_form" type="text" id="email" placeholder="e.g. Carla"></p>
 
-<label>Full Name</label>
-<p><input required="required" class="oabutton_form" type="text" id="name" placeholder="e.g. Carla Hayden"></p>
+<label>Second Name</label>
+<p><input required="required" class="oabutton_form" type="text" id="name" placeholder="e.g. Hayden"></p>
 
-<label>Library Name</label>
+<label>Library Full Name</label>
 <p><input required="required" class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
 
-<label>Your Reference Number (if any)</label>
+<label>Library Full Abbreviation</label>
 <p><input class="oabutton_form" type="text" id="reference" placeholder="e.g. 02397133-002"></p>
 
-<label>Notes</label>
-<p><input class="oabutton_form" type="text" id="other" placeholder="e.g. Please process quickly!"></p>
+<label>Email Address</label>
+<p><input required="required" class="oabutton_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
+
+<label>Country</label>
+<p><input required="required" class="oabutton_form" type="text" id="email" placeholder="e.g. United States of America"></p>
 
 <input class="oabutton_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Submit Request">
 
 </form>
 
 <script>
-sid = 'AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU'; <!-- TODO -->
+sid = ''; <!-- TODO -->
 url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
 fields = [];
 </script>
