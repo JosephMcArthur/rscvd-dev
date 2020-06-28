@@ -1,5 +1,5 @@
 ---
-layout: volunteers
+layout: volunteer
 ---
 
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources.
