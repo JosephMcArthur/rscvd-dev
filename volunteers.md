@@ -7,7 +7,7 @@ The RSCVD initiative is made possible by the generous help of volunteers around 
 <html>
 <form id="submission">
 
-<h1>Join the team </h1>
+<h1>Join the volunteer team</h1>
 
 <label>First Name</label>
 <p><input required="required" class="oabutton_form" type="text" id="email" placeholder="e.g. Carla"></p>
@@ -31,6 +31,8 @@ The RSCVD initiative is made possible by the generous help of volunteers around 
 
 </form>
 </html>
+
+<h1>Current volunteers</h1>
 
 Below is the list of volunteers as of June 13th, 2020.
 
@@ -151,6 +153,7 @@ Claire|Hordern|University of Manchester Library|UK
 Martina|Hediger|Universität Zürich|Switzerland
 Stefanie|Mauritz|Cardiff University|CRDF
 
+<h1>With thanks to...</h1>
 
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
