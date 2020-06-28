@@ -2,7 +2,35 @@
 layout: volunteers
 ---
 
-The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
+The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources.
+
+<html>
+<form id="submission">
+
+<h1>Join the team </h1>
+
+<label>First Name</label>
+<p><input required="required" class="oabutton_form" type="text" id="email" placeholder="e.g. Carla"></p>
+
+<label>Second Name</label>
+<p><input required="required" class="oabutton_form" type="text" id="name" placeholder="e.g. Hayden"></p>
+
+<label>Library Full Name</label>
+<p><input required="required" class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
+
+<label>Library Full Abbreviation</label>
+<p><input class="oabutton_form" type="text" id="reference" placeholder="e.g. 02397133-002"></p>
+
+<label>Email Address</label>
+<p><input required="required" class="oabutton_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
+
+<label>Country</label>
+<p><input required="required" class="oabutton_form" type="text" id="email" placeholder="e.g. United States of America"></p>
+
+<input class="oabutton_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Submit Request">
+
+</form>
+</html>
 
 Below is the list of volunteers as of June 13th, 2020.
 
@@ -127,3 +155,11 @@ Stefanie|Mauritz|Cardiff University|CRDF
 Thanks also goes to the [IFLA DDRS Standing Committee members](https://www.ifla.org/standing-committee/15) for providing their expertise in starting, promoting and subsequently providing their resources for the initiative.
 
 Finally, Joe McArthur and the [Open Access Button](https://openaccessbutton.org) have provided valuable support on creating the website and the request form using [InstantILL](htttps://instantill.org). The Open Access Button allows librarians to find materials they are looking for even without making a request.
+
+<script>
+sid = ''; <!-- TODO -->
+url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
+fields = [];
+</script>
+
+{% include form.html %}
