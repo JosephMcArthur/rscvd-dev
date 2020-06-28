@@ -16,7 +16,7 @@ The RSCVD initiative is made possible by the generous help of volunteers around 
 
 <tbody sheetsu="https://sheetsu.com/apis/v1.0su/fe47679f0471" sheetsu-limit="100" sheetsu-ignore-case="true">
 <tr>
-<td>{{first.name}}</td>
+<td>{{page.first.name}}</td>
 <td>{{Last.Name}}</td>
 <td>{{Last.Name}}</td>
 <td>{{Country}}</td>
