@@ -1,5 +1,6 @@
 ---
 layout: volunteers
+first.name: {{First.Name}}
 ---
 
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources. If you wish to join in volunteering for the initiative, please contact [ifladdrs@gmail.com](mailto:ifladdrs@gmail.com).
@@ -15,10 +16,10 @@ The RSCVD initiative is made possible by the generous help of volunteers around 
 
 <tbody sheetsu="https://sheetsu.com/apis/v1.0su/fe47679f0471" sheetsu-limit="100" sheetsu-ignore-case="true">
 <tr>
-<td>{||First Name||}</td>
-<td>{{{{Last Name{{Last Name}}}}</td>
-<td></td>
-<td>{{{{Country}}}}</td>	
+<td>{{first.name}}</td>
+<td>{{Last.Name}}</td>
+<td>{{Last.Name}}</td>
+<td>{{Country}}</td>
 </tr>
 </tbody>
 
