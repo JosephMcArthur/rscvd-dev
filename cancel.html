@@ -2,9 +2,12 @@
 layout: default
 ---
 
-<h1>Click to confirm</h1>
+<h1>Cancel your request</h1>
 
 <form id="submission">
+
+<label>Tell us why you're cancelling (optional)</label>
+<p><class="oabutton_form" type="text" id="reason" placeholder="e.g filled elsewhere"></p>
 
 <input class="oabutton_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Confirm Cancelation">
 
@@ -13,7 +16,7 @@ layout: default
 <script>
 var sid = ''; // TODO: set this up
 var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
-var fields = ["title","time"];
+var fields = ["title","time","reason"];
 </script>
 
 {% include form.html %}
