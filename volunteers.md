@@ -1,6 +1,13 @@
 ---
 layout: volunteers
 ---
+<html>
+<div id="alert_content_wrap" class="outer">
+  <section id="alert_content" class="inner">
+    <p>This form won't submit yet.</p>
+  </section>
+</div>
+</html>
 
 The RSCVD initiative is made possible by the generous help of volunteers around the world. We sincerely thank and appreciate volunteers for their time, expertise and resources.
 
