@@ -6,16 +6,15 @@ layout: default
 <form id="submission">
 
 <label>Tell us why you're updating (optional)</label>
-<p><input class="oabutton_form" type="text" id="reason" placeholder="e.g filled elsewhere"></p>
 
-<input class="oabutton_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Confirm Cancelation">
+<input class="oabutton_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Submit Update">
 
 </form>
 
 <script>
 var sid = 'AKfycbzLmDUA_GvKslQ9boFJ1lq9limyFbZOWCWicscAW4EDRIZt5r0';
 var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
-var fields = ["title","time","update","reason"];
+var fields = ["title","time","update"];
 </script>
 
 {% include form.html %}
