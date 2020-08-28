@@ -1,18 +1,11 @@
 ---
 layout: default
 ---
-
-<div id="alert_content_wrap" class="outer">
-  <section id="alert_content" class="inner">
-    <p>This won't submit yet. But, it'll submit to the spreadsheet</p>
-  </section>
-</div>
-
-<h1>Cancel your request</h1>
+<h1>Update your request</h1>
 
 <form id="submission">
 
-<label>Tell us why you're cancelling (optional)</label>
+<label>Tell us why you're updating (optional)</label>
 <p><input class="oabutton_form" type="text" id="reason" placeholder="e.g filled elsewhere"></p>
 
 <input class="oabutton_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Confirm Cancelation">
@@ -20,9 +13,9 @@ layout: default
 </form>
 
 <script>
-var sid = ''; // TODO: set this up
+var sid = '16P64EPyIlMI2i2Ij9Skpe5UyflK3DORJ6Fv4SJyoHxU'; // TODO: set this up
 var url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
-var fields = ["title","time","reason"];
+var fields = ["title","time","update","reason"];
 </script>
 
 {% include form.html %}
