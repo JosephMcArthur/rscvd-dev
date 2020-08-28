@@ -263,11 +263,25 @@ Full-Width Styles
   margin: 0 auto;
 }
 
-#forkme_banner {
+#nav_tab {
   display: block;
   position: absolute;
   top:0;
   right: 10px;
+  z-index: 10;
+  padding: 10px 50px 10px 10px;
+  color: #00492c;
+  background: #fff no-repeat 95% 50%;
+  font-weight: 700;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+#nav_tab_2 {
+  display: block;
+  position: absolute;
+  top:0;
+  right: 50px;
   z-index: 10;
   padding: 10px 50px 10px 10px;
   color: #00492c;
