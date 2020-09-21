@@ -37,7 +37,7 @@ The RSCVD initiative is made possible by the generous help of volunteers around 
 <label>Don't show my name on the volunteers list</label>
 <p><input class="oabutton_form" type="checkbox" id="hide"></p>
 
-<input class="oabutton_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Submit Request">
+<input class="_oab_find" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Submit Request">
 
 </form>
 </html>
