@@ -17,25 +17,25 @@ The RSCVD initiative is made possible by the generous help of volunteers around 
 <h1>Join the volunteer team</h1>
 
 <label>First Name</label>
-<p><input required="required" class="oabutton_form" type="text" id="first" placeholder="e.g. Carla"></p>
+<p><input required="required" class="_oab_form" type="text" id="first" placeholder="e.g. Carla"></p>
 
 <label>Second Name</label>
-<p><input required="required" class="oabutton_form" type="text" id="second" placeholder="e.g. Hayden"></p>
+<p><input required="required" class="_oab_form" type="text" id="second" placeholder="e.g. Hayden"></p>
 
 <label>Library Full Name</label>
-<p><input required="required" class="oabutton_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
+<p><input required="required" class="_oab_form" type="text" id="organization" placeholder="e.g. Harvard University Library"></p>
 
 <label>Library Full Abbreviation</label>
-<p><input class="oabutton_form" type="text" id="abbreviation" placeholder="e.g. HRVD"></p>
+<p><input class="_oab_form" type="text" id="abbreviation" placeholder="e.g. HRVD"></p>
 
 <label>Email Address</label>
-<p><input required="required" class="oabutton_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
+<p><input required="required" class="_oab_form" type="email" id="email" placeholder="e.g. your.email@institution.edu"></p>
 
 <label>Country</label>
-<p><input required="required" class="oabutton_form" type="text" id="country" placeholder="e.g. United States of America"></p>
+<p><input required="required" class="_oab_form" type="text" id="country" placeholder="e.g. United States of America"></p>
 
 <label>Don't show my name on the volunteers list</label>
-<p><input class="oabutton_form" type="checkbox" id="hide"></p>
+<p><input class="_oab_form" type="checkbox" id="hide"></p>
 
 <input class="_oab_button" href="/" id="submit" aria-label="submit" style="min-width:150px;" type="submit" value="Submit Request">
 
