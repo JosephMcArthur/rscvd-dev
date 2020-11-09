@@ -6,6 +6,10 @@ layout: default
 
 <form id="submission">
 
+  <label>Needed by (optional)
+  <p><input class="_oab_form datepicker" type="text" id="needed-by" placeholder=""></p>
+  </label>
+
 <label>Book Title
 <p><input class="_oab_form" type="text" id="title" placeholder="Biology for dummies"></p>
 </label>
@@ -68,3 +72,10 @@ var fields = [];
 </script>
 
 {% include form.html %}
+<script>
+$(".datepicker").datepicker({
+    dateFormat: 'dd/mm/yy',
+    minDate: 0,
+    maxDate: 14
+});
+</script>
