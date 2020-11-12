@@ -93,20 +93,5 @@ var yyyy = today.getFullYear();
     }
 
 today = yyyy+'-'+mm+'-'+dd;
-
-var limit = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
- if(dd<10){
-        dd='14'+dd
-    }
-    if(mm<10){
-        mm='14'+mm
-    }
-
-limit = yyyy+'-'+mm+'-'+dd;
-
 document.getElementById("needed-by").setAttribute("min", today);
-document.getElementById("needed-by").setAttribute("max", limit);
 </script>
