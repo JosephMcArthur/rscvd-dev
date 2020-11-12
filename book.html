@@ -40,10 +40,9 @@ layout: default
 
 <!-- needed by date goes here -->
 <label>Need by date
-<small>Requests more than two weeks old won't be filled.</small>
 <p><input class="_oab_form" type="date" id="needed-by" min='1899-01-01' max='2000-13-13'></p>
 </label>
-
+<small>Requests more than two weeks old won't be filled.</small>
 
 <label>Your Reference Number (if any)
 <p><input class="_oab_form" type="text" id="reference" placeholder="e.g. 02397133-002"></p>
@@ -94,5 +93,20 @@ var yyyy = today.getFullYear();
     }
 
 today = yyyy+'-'+mm+'-'+dd;
+
+var limit = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='14'+dd
+    }
+    if(mm<10){
+        mm='14'+mm
+    }
+
+limit = yyyy+'-'+mm+'-'+dd;
+
 document.getElementById("needed-by").setAttribute("min", today);
+document.getElementById("needed-by").setAttribute("max", limit);
 </script>
