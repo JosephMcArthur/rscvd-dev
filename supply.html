@@ -1,68 +1,42 @@
-<!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,maximum-scale=2">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+---
+layout: default
+---
 
-    <script src="https://bgb.lvatn.com/client/pradm.js"></script>
-    <script src="https://bgb.lvatn.com/client/pradmLogin.js"></script>
+<p class="controls" style="display: none;">
+  Show <input type="radio" name="types" class="types" value="book"> books
+  or <input type="radio" name="types" class="types" value="paper"> papers
+</p>
 
-    <!--<script async defer src="https://sa-supply.rscvd.org/latest.js"></script>-->
+<p>
+  <!--<a target="_blank" href="https://rscvd.org/supply">Instructions</a>-->
+  <a class="pradmLogout" href="#">Logout</a>
+</p>
 
-{% seo %}
-  </head>
+<div id="#filters" class="controls" style="display: none;"></div>
 
-  <body>
+<div id="login" style="display: none;">
+  <input autofocus id="pradmEmail" class="pradmEmail big shadow" type="text" name="email" placeholder="email">
+  <input id="pradmToken" class="pradmToken" style="display:none;" type="text" name="token" placeholder="token (check your email)">
+</div>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="nav_tab" href="/faq">FAQ</a>
+<table>
+  <thead><tr></tr></thead>
+  <tbody id="results"></tbody>
+</table>
 
-          <h1 id="project_title">Supply</h1>
+<div class="pradmLoading" style="display: none;">Loading...</div>
 
-        </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
 
-        <p class="controls" style="display: none;">
-          Show <input type="radio" name="types" class="types" value="book"> books
-          or <input type="radio" name="types" class="types" value="paper"> papers
-        </p>
+<script>
+  window.api = 'https://bgb.lvatn.com';
+  window.pradm = {};
+  window.pradm.api = window.api;
+</script>
 
-        <p>
-          <!--<a target="_blank" href="https://rscvd.org/supply">Instructions</a>-->
-          <a class="pradmLogout" href="#">Logout</a>
-        </p>
-
-        <div id="#filters" class="controls" style="display: none;"></div>
-
-        <div id="login" style="display: none;">
-          <input autofocus id="pradmEmail" class="pradmEmail big shadow" type="text" name="email" placeholder="email">
-          <input id="pradmToken" class="pradmToken" style="display:none;" type="text" name="token" placeholder="token (check your email)">
-        </div>
-
-        <table>
-          <thead><tr></tr></thead>
-          <tbody id="results"></tbody>
-        </table>
-
-        <div class="pradmLoading" style="display: none;">Loading...</div>
-
-      </section>
-    </div>
-
-    <!-- FOOTER CONTENT -->
-
-    {% include footer.html %}
-
-  </body>
+<script src="https://bgb.lvatn.com/client/pradm.js"></script>
+<script src="https://bgb.lvatn.com/client/pradmLogin.js"></script>
 
 <script>
   /* global pradm */
@@ -79,7 +53,7 @@
       pradm.html('#results', '');
     }
     pradm.show('.pradmLoading');
-    var url = '/svc/rscvd';
+    var url = api + '/svc/rscvd';
     var email = pradm.get('#email');
     var qry = 'email:' + (email ? '"' + email + '"' : '*');
     var title = pradm.get('#title');
@@ -226,7 +200,7 @@
     var deny = cls.indexOf("deny") !== -1;
     pradm.html(el, (deny ? "Deny" : "Verify") + 'ing...');
     var email = cls.pop();
-    pradm.ajax("/svc/rscvd/" + (deny ? "deny" : "verify") + "/" + email, {
+    pradm.ajax(api + '/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email, {
       success: function(res) {
         if (res) pradm.each('.verifier', function(el) { _vd(el, email, deny); });
       }
@@ -235,7 +209,7 @@
   pradm.on("change", ".status", function(e) {
     var el = e.target;
     var cls = pradm.classes(el);
-    pradm.ajax("/svc/rscvd/status/" + cls.pop() + "/" + el.value, {
+    pradm.ajax(api + '/svc/rscvd/status/' + cls.pop() + "/" + el.value, {
       success: function(res) {
         if (res) _state_hide(el);
       }
@@ -244,7 +218,7 @@
   
   setInterval(function() {
     _lastpoll = Date.now();
-    var url = '/svc/rscvd/poll/' + (_lastpoll - 300000);
+    var url = api + '/svc/rscvd/poll/' + (_lastpoll - 300000);
     pradm.ajax(url, {
       success: function(res) {
         _polls = res;
@@ -261,4 +235,3 @@
   }, 10000);
 </script>
 
-</html>
