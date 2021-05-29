@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+    <script src="https://bgb.lvatn.com/client/pradm.js"></script>
+    <script src="https://bgb.lvatn.com/client/pradmLogin.js"></script>
+
+    <!--<script async defer src="https://sa-supply.rscvd.org/latest.js"></script>-->
+
+{% seo %}
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="nav_tab" href="/faq">FAQ</a>
+
+          <h1 id="project_title">Supply</h1>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+        <p class="controls" style="display: none;">
+          Show <input type="radio" name="types" class="types" value="book"> books
+          or <input type="radio" name="types" class="types" value="paper"> papers
+        </p>
+
+        <p>
+          <!--<a target="_blank" href="https://rscvd.org/supply">Instructions</a>-->
+          <a class="pradmLogout" href="#">Logout</a>
+        </p>
+
+        <div id="#filters" class="controls" style="display: none;"></div>
+
+        <div id="login" style="display: none;">
+          <input autofocus id="pradmEmail" class="pradmEmail big shadow" type="text" name="email" placeholder="email">
+          <input id="pradmToken" class="pradmToken" style="display:none;" type="text" name="token" placeholder="token (check your email)">
+        </div>
+
+        <table>
+          <thead><tr></tr></thead>
+          <tbody id="results"></tbody>
+        </table>
+
+        <div class="pradmLoading" style="display: none;">Loading...</div>
+
+      </section>
+    </div>
+
+    <!-- FOOTER CONTENT -->
+
+    {% include footer.html %}
+
+  </body>
+
+<script>
+  /* global pradm */
+  
+  var _first = true;
+  var _max = false;
+  var _from = 0;
+  var _size = 50;
+  var _paging = false;
+  var _search = function() {
+    if (!_paging) {
+      _max = false;
+      _from = 0;
+      pradm.html('#results', '');
+    }
+    pradm.show('.pradmLoading');
+    var url = '/svc/rscvd';
+    var email = pradm.get('#email');
+    var qry = 'email:' + (email ? '"' + email + '"' : '*');
+    var title = pradm.get('#title');
+    qry += ' AND ' + (title ? 'title:"' + title + '"' : '(title:* OR atitle:*)');
+    var status = pradm.get('#status');
+    if (status !== 'All') {
+      qry += ' AND ' + (status ? 'status:"' + status + '"' : '(status:"Awaiting verification" OR status:"Verified" OR status:"In progress" OR status:"Awaiting Peter")');
+    }
+    pradm.each('.types', function(el) {
+      if (pradm.checked(el)) qry += ' AND sid:"' + pradm.get(el) + '"';
+    });
+    url += '?q=' + qry + '&sort=createdAt:desc&size=' + _size + (_from ? '&from=' + _from : '');
+    if (_first) url += '&terms=email,status,title';
+    pradm.ajax(url, {
+      success: function(res) {
+        var body = '';
+        if (res.hits.hits.length < _size) _max = true;
+        for (var h in res.hits.hits) {
+          var r = res.hits.hits[h]._source;
+          body += '<tr><td>';
+          body += (r.doi && r.doi.startsWith('10.') ? '<a target="_blank" href="https://doi.org/' + r.doi + '">' : '') + '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (r.doi && r.doi.startsWith('10.') ? '</a>' : '');
+          if (r.year || r.publisher || (r.title && r.atitle))
+            body += '<br>' + (r.year ? r.year + ' ' : '') + (r.title && r.atitle ? '<i><a class="title" href="#">' + r.title + '</a></i>' + (r.publisher ? ', ' : '') : '') + (r.publisher ? r.publisher : '');
+          if (r.volume || r.issue || r.pages)
+            body += '<br>' + (r.volume ? 'vol: ' + r.volume + ' ' : '') + (r.issue ? 'issue: ' + r.issue + ' ' : '') + (r.pages ? 'page(s): ' + r.pages : '');
+          if (r.doi || r.issn || r.isbn)
+            body += '<br>' + (r.doi && r.doi.startsWith('10.') ? '<a target="_blank" href="https://doi.org/' + r.doi + '">' + r.doi + '</a> ' : '') + (r.issn ? ' ISSN ' + r.issn : '') + (r.isbn ? ' ISBN ' + r.isbn : '');
+          body += '</td><td>';
+
+          body += '<div class="verified"' + (r.verified ? '' : ' style="display:none;"') + '>';
+          body += '<a href="mailto:' + r.email + '?subject=RSCVD%20Request&body=Hi%20' + r.name + ', we got your ID for ' + res.hits.hits[h]._id + '">' + r.email + '</a>';
+          if (r['needed-by']) {
+            body += '<br>Required by ' + r['needed-by'].split('-').reverse().join('/');
+            if (r.reference) body += '<br>Ref: ' + r.reference;
+          }
+          if (r.status === 'Overdue' || r.status === 'Cancelled') {
+            body += '<br><b>' + r.status + '</b>';
+          } else {
+            body += '<br><select class="status ' + res.hits.hits[h]._id + '">';
+            var sopts = ['In progress', 'Awaiting Peter', 'Provided', 'Done'];
+            if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
+            for (var s in sopts) {
+              var st = sopts[s];
+              body += '<option' + (r.status === st ? ' selected' : '') + '>' + st + '</option>';
+            }
+            body += '</select></div>';
+          }
+
+          body += '<div class="denied"' + (r.verified === false ? '' : ' style="display:none;""') + '><span style="color: red;">' + r.email + '</span><br>Request denied</div>';
+
+          body += '<div class="verifier ' + r.email + '"' + (r.verified === undefined ? '' : ' style="display:none;"') + '>';
+          body += (r.name ? r.name : r.email) + (r.organization ? (r.name ? ', ' : '') + r.organization : '');
+          var nn = r.name ? r.name.split(' ')[0] : r.email.split('@')[0];
+          body += '<br><a class="button action verify ' + r.email + '" href="#">Verify ' + nn + '</a> <a class="button warning verify deny ' + r.email + '" href="#">Deny ' + nn + '</a>';
+          body += '</div>';
+
+          body += '</td></tr>';
+        }
+        pradm.append('#results', body);
+        
+        if (_first && res.aggregations) {
+          _first = false;
+          for (var f in res.aggregations) {
+            var filter = res.aggregations[f];
+            var fl = '<select class="filter" id="' + filter + '"><option value="">Filter by ' + filter + '</option>';
+            for (var b in res.aggregations[filter].buckets) {
+              fl += '<option>' + res.aggregations[filter].buckets[b].key + '</option>';
+            }
+            if (filter === 'status') fl += '<option>All</option>';
+            fl += '</select>';
+            pradm.append('#filters', fl);
+          }
+          pradm.show('.controls');
+        }
+        pradm.hide('.pradmLoading');
+        _paging = false;
+        //window.history.pushState("", "", window.location.pathname + (q !== '' ? "?q=" + q : ''));
+      }
+    });
+  };
+
+  if (pradm.loggedin()) {
+    pradm.show('.pradmLoading');
+    _search();
+  } else {
+    pradm.show('#login');
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!_max && !_paging && (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+      _paging = true;
+      _from += _size;
+      _search();
+    }
+  });
+  pradm.on("change", '.filter', _search);
+  pradm.on("click", ".title", function(e) {
+    e.preventDefault();
+    pradm.set('#title', e.target.innerHTML);
+    //_search();
+  });
+  pradm.listen("change", '.types', _search);
+
+  var _polls = undefined;
+  var _lastpoll = Date.now();
+
+  var _vd = function(el, email, deny) {
+    if (!email) {
+      var ce = pradm.classes(el).pop();
+      if (_polls.verify.indexOf(ce) !== -1) {
+        email = true;
+      } else if (_polls.deny.indexOf(ce) !== -1) {
+        email = true;
+        deny = true;
+      }
+    }
+    if (email === true || (email && pradm.has(el, '.' + email))) {
+      pradm.hide(el);
+      var siblings = pradm.siblings(el);
+      for ( var s in siblings) {
+        var sibling = siblings[s];
+        if (pradm.has(sibling, 'verified')) {
+          pradm[deny ? 'hide' : 'show'](sibling);
+        } else if (pradm.has(sibling, 'denied')) {
+          pradm[deny ? 'show' : 'hide'](sibling);
+        }
+      }
+    }
+  };
+  
+  var _state_hide = function(el) {
+    if (['Provided', 'Done'].indexOf(el.value) !== -1) {
+      pradm.class(el.closest('tr'), 'alert');
+      setTimeout(function() {
+        pradm.remove(el.closest('tr'));
+      }, 500);
+    }
+  };
+  
+  pradm.on("click", ".verify", function(e) {
+    e.preventDefault();
+    var el = e.target;
+    var cls = pradm.classes(el);
+    var deny = cls.indexOf("deny") !== -1;
+    pradm.html(el, (deny ? "Deny" : "Verify") + 'ing...');
+    var email = cls.pop();
+    pradm.ajax("/svc/rscvd/" + (deny ? "deny" : "verify") + "/" + email, {
+      success: function(res) {
+        if (res) pradm.each('.verifier', function(el) { _vd(el, email, deny); });
+      }
+    });
+  });
+  pradm.on("change", ".status", function(e) {
+    var el = e.target;
+    var cls = pradm.classes(el);
+    pradm.ajax("/svc/rscvd/status/" + cls.pop() + "/" + el.value, {
+      success: function(res) {
+        if (res) _state_hide(el);
+      }
+    });
+  });
+  
+  setInterval(function() {
+    _lastpoll = Date.now();
+    var url = '/svc/rscvd/poll/' + (_lastpoll - 300000);
+    pradm.ajax(url, {
+      success: function(res) {
+        _polls = res;
+        pradm.each('.verifier', function(el) { _vd(el); });
+        for ( var s in _polls.status ) {
+          var el = pradm.exists('.' + s);
+          if (el && pradm.has(el, '.status') && pradm.val(el) !== res.status[s]) {
+            pradm.set(el, res.status[s]);
+            _state_hide(el);
+          }
+        }
+      }
+    });
+  }, 10000);
+</script>
+
+</html>
