@@ -11,11 +11,11 @@ layout: default
   <a class="pradmLogout" href="#" style="display: none;">Logout</a>
 </p>
 
-<div id="#filters" class="controls" style="display: none;"></div>
+<div id="filters" class="controls" style="display: none;"></div>
 
 <div id="login" style="display: none;">
-  <input autofocus id="pradmEmail" class="pradmEmail big shadow" type="text" name="email" placeholder="email">
-  <input id="pradmToken" class="pradmToken" style="display:none;" type="text" name="token" placeholder="token (check your email)">
+  <input autofocus id="pradmEmail" class="pradmEmail _oab_form" type="text" name="email" placeholder="email">
+  <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
 
 <table>
@@ -90,7 +90,7 @@ layout: default
           if (r.status === 'Overdue' || r.status === 'Cancelled') {
             body += '<br><b>' + r.status + '</b>';
           } else {
-            body += '<br><select class="status ' + res.hits.hits[h]._id + '">';
+            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '">';
             var sopts = ['In progress', 'Awaiting Peter', 'Provided', 'Done'];
             if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
             for (var s in sopts) {
