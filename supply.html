@@ -12,8 +12,8 @@ layout: supply
   <a id="options" href="#">Options</a>
 </div>
 
-<div class="options" style="display: none; margin-bottom: 5px;">
-  <p style="text-align:right;"><a class="pradmLogout" href="#">Logout</a></p>
+<div class="options" style="display: none; margin-top: 10px; margin-bottom: 5px;">
+  <p style="text-align:right; margin-bottom: -20px;"><a class="pradmLogout" href="#">Logout</a></p>
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
@@ -127,7 +127,7 @@ layout: supply
         if (_first && res.aggregations) {
           _first = false;
           for (var f in res.aggregations) {
-            var fl = '<select class="_oab_form filter" id="' + f + '" style="max-width:24%;"><option value="">Filter by ' + f + '</option>';
+            var fl = '<select class="_oab_form filter" id="' + f + '" style="max-width: 24%; display: inline;"><option value="">Filter by ' + f + '</option>';
             for (var b in res.aggregations[f].buckets) {
               fl += '<option>' + res.aggregations[f].buckets[b].key + '</option>';
             }
