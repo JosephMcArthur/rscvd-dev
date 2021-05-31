@@ -8,7 +8,11 @@ layout: default
   <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
 
-<div class="options"> <!--  style="display: none;" -->
+<p class="controls" style="text-align:right; display: none;">
+  <a id="options" href="#">Options</a> <a class="pradmLogout" href="#">Logout</a>
+</p>
+
+<div class="options" style="display: none;">
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
@@ -16,11 +20,6 @@ layout: default
 
   <div id="filters"></div>
 </div>
-
-<p class="controls" style="text-align:right; display: none;">
-  <a id="options" href="#">Options</a>
-  <a class="pradmLogout" href="#">Logout</a>
-</p>
 
 <table>
   <thead><tr></tr></thead>
@@ -121,7 +120,7 @@ layout: default
         if (_first && res.aggregations) {
           _first = false;
           for (var f in res.aggregations) {
-            var fl = '<select class="filter" id="' + f + '"><option value="">Filter by ' + f + '</option>';
+            var fl = '<select class="_oab_form filter" id="' + f + '"><option value="">Filter by ' + f + '</option>';
             for (var b in res.aggregations[f].buckets) {
               fl += '<option>' + res.aggregations[f].buckets[b].key + '</option>';
             }
