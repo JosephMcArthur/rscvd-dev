@@ -9,13 +9,15 @@ layout: default
 </div>
 
 <p class="controls" style="text-align:right; display: none;">
-  <a id="options" href="#">Options</a> <a class="pradmLogout" href="#">Logout</a>
+  <a id="options" href="#">Options</a>
 </p>
 
 <div class="options" style="display: none;">
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="pradmLogout" href="#">Logout</a>
   </p>
 
   <div id="filters"></div>
@@ -93,7 +95,7 @@ layout: default
           if (r.status === 'Overdue' || r.status === 'Cancelled') {
             body += '<br><b>' + r.status + '</b>';
           } else {
-            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '">';
+            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '" style="max-width:24%;">';
             var sopts = ['In progress', 'Awaiting Peter', 'Done'];
             if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
             for (var s in sopts) {
@@ -108,7 +110,7 @@ layout: default
           body += '<div class="verifier ' + r.email + '"' + (r.verified === undefined ? '' : ' style="display:none;"') + '>';
           body += (r.name ? r.name : r.email) + (r.organization ? (r.name ? ', ' : '') + r.organization : '');
           var nn = r.name ? r.name.split(' ')[0] : r.email.split('@')[0];
-          body += '<br><a class="button action verify ' + r.email + '" href="#">Verify ' + nn + '</a> <a class="button warning verify deny ' + r.email + '" href="#">Deny ' + nn + '</a>';
+          body += '<br><a class="button action verify ' + r.email + '" href="#">Approve ' + nn + '</a> <a class="button warning verify deny ' + r.email + '" href="#">Deny ' + nn + '</a>';
           body += '</div>';
 
           body += '</td></tr>';
@@ -194,7 +196,7 @@ layout: default
     var el = e.target;
     var cls = pradm.classes(el);
     var deny = cls.indexOf("deny") !== -1;
-    pradm.html(el, (deny ? "Deny" : "Verify") + 'ing...');
+    pradm.html(el, (deny ? "Deny" : "Approv") + 'ing...');
     var email = cls.pop();
     pradm.ajax(api + '/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email, {
       success: function(res) {
