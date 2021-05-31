@@ -116,15 +116,16 @@ layout: default
         }
         pradm.append('#results', body);
         
+        console.log(_first)
+        console.log(res.aggregations)
         if (_first && res.aggregations) {
           _first = false;
           for (var f in res.aggregations) {
-            var filter = res.aggregations[f];
-            var fl = '<select class="filter" id="' + filter + '"><option value="">Filter by ' + filter + '</option>';
-            for (var b in res.aggregations[filter].buckets) {
-              fl += '<option>' + res.aggregations[filter].buckets[b].key + '</option>';
+            var fl = '<select class="filter" id="' + f + '"><option value="">Filter by ' + f + '</option>';
+            for (var b in res.aggregations[f].buckets) {
+              fl += '<option>' + res.aggregations[f].buckets[b].key + '</option>';
             }
-            if (filter === 'status') fl += '<option>All</option>';
+            if (f === 'status') fl += '<option>All</option>';
             fl += '</select>';
             pradm.append('#filters', fl);
           }
@@ -213,7 +214,6 @@ layout: default
   });
   
   pradm.afterLogin = function() {
-    pradm.show('.pradmLoading');
     _search();
     setInterval(function() {
       _lastpoll = Date.now();
