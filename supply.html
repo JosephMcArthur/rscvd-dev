@@ -12,8 +12,8 @@ layout: supply
   <a id="options" href="#">Options</a>
 </div>
 
-<div class="options" style="display: none; margin-top: 10px; margin-bottom: 5px;">
-  <p style="text-align:right; margin-bottom: -20px;"><a class="pradmLogout" href="#">Logout</a></p>
+<div class="options" style="display: none; margin-top: 40px; margin-bottom: 5px;">
+  <p style="text-align:right; margin-bottom: -50px;"><a class="pradmLogout" href="#">Logout</a></p>
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
@@ -68,7 +68,7 @@ layout: supply
       if (pradm.checked(el)) qry += ' AND sid:"' + pradm.get(el) + '"';
     });
     url += '?q=' + qry + '&sort=createdAt:desc&size=' + _size + (_from ? '&from=' + _from : '');
-    if (_first) url += '&terms=email,status,title';
+    if (_first) url += '&terms=status'; // email,title,
     pradm.ajax(url, {
       success: function(res) {
         var body = '';
@@ -92,7 +92,14 @@ layout: supply
           body += '</td><td>';
 
           body += '<div class="verified"' + (r.verified ? '' : ' style="display:none;"') + '>';
-          body += '<a href="mailto:' + r.email + '?subject=RSCVD%20Request&body=Hi%20' + r.name + ', we got your ID for ' + res.hits.hits[h]._id + '">' + r.email + '</a>';
+          body += '<a href="mailto:' + r.email + '?subject=RSCVD%20Request%20Receipt&body=';
+
+          var msg = 'Hi ' + r.name + ',\n\nWe got your request of:\n\nTitle: ' + (r.atitle ? r.atitle : r.title) + '\nReference (if provided): ' + r.reference + '\n\n';
+          msg += 'If at any point you no longer need this item, please <a href="https://dev.rscvd.org/update?cancel=' + res.hits.hits[h]._id + '">cancel your request</a>, it only takes a second.\n\n';
+          msg += 'Our team of volunteers will try and fill your request as soon as possible. If you would like to thank us, please consider <a href="https://rscvd.org/volunteer">joining us in helping supply requests</a>.';
+
+          body += encodeURIComponent(msg);
+          body += '">' + r.email + '</a>';
           if (r['needed-by']) {
             body += '<br>Required by ' + r['needed-by'].split('-').reverse().join('/');
             if (r.reference) body += '<br>Ref: ' + r.reference;
@@ -122,18 +129,18 @@ layout: supply
         }
         pradm.append('#results', body);
         
-        console.log(_first)
-        console.log(res.aggregations)
-        if (_first && res.aggregations) {
+        if (_first) {
           _first = false;
-          for (var f in res.aggregations) {
-            var fl = '<select class="_oab_form filter" id="' + f + '" style="max-width: 24%; display: inline;"><option value="">Filter by ' + f + '</option>';
-            for (var b in res.aggregations[f].buckets) {
-              fl += '<option>' + res.aggregations[f].buckets[b].key + '</option>';
+          if (res.aggregations) {
+            for (var f in res.aggregations) {
+              var fl = '<select class="_oab_form filter" id="' + f + '" style="max-width: 24%; display: inline;"><option value="">Filter by ' + f + '</option>';
+              for (var b in res.aggregations[f].buckets) {
+                fl += '<option>' + res.aggregations[f].buckets[b].key + '</option>';
+              }
+              if (f === 'status') fl += '<option>All</option>';
+              fl += '</select>';
+              pradm.append('#filters', fl);
             }
-            if (f === 'status') fl += '<option>All</option>';
-            fl += '</select>';
-            pradm.append('#filters', fl);
           }
           pradm.show('.controls');
         }
