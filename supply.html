@@ -94,7 +94,7 @@ layout: supply
           if (r.status === 'Overdue' || r.status === 'Cancelled') {
             body += '<br><b>' + r.status + '</b>';
           } else {
-            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '" style="max-width:24%;">';
+            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '" style="width:24%;">';
             var sopts = ['In progress', 'Awaiting Peter', 'Done'];
             if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
             for (var s in sopts) {
