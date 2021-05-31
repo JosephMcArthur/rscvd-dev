@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: supply
 ---
 
 <div id="login" style="display: none;">
@@ -8,16 +8,11 @@ layout: default
   <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
 
-<p class="controls" style="text-align:right; display: none;">
-  <a id="options" href="#">Options</a>
-</p>
-
-<div class="options" style="display: none;">
+<div class="options" style="display: none; margin-bottom: 5px;">
+  <p style="text-align:right;"><a class="pradmLogout" href="#">Logout</a></p>
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a class="pradmLogout" href="#">Logout</a>
   </p>
 
   <div id="filters"></div>
@@ -153,7 +148,7 @@ layout: default
     //_search();
   });
   pradm.listen("change", '.types', _search);
-  pradm.on("click", '#options', function() { pradm.toggle('.options'); });
+  pradm.on("click", '#options', function(e) { e.preventDefault(); pradm.toggle('.options'); });
 
   var _polls = undefined;
   var _lastpoll = Date.now();
