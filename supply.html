@@ -75,8 +75,14 @@ layout: supply
         if (res.hits.hits.length < _size) _max = true;
         for (var h in res.hits.hits) {
           var r = res.hits.hits[h]._source;
+          for ( var k in r ) r[k] = decodeURIComponent(r[k]); // clean up for old test data
           body += '<tr><td>';
-          body += (r.doi && r.doi.startsWith('10.') ? '<a target="_blank" href="https://doi.org/' + r.doi + '">' : '') + '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (r.doi && r.doi.startsWith('10.') ? '</a>' : '');
+          var needsa = false;
+          if (r.doi && r.doi.startsWith('10.')) {
+            needsa = true;
+            body += '<a target="_blank" href="https://doi.org/' + r.doi + '">';
+          }
+          body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
           if (r.year || r.publisher || (r.title && r.atitle))
             body += '<br>' + (r.year ? r.year + ' ' : '') + (r.title && r.atitle ? '<i><a class="title" href="#">' + r.title + '</a></i>' + (r.publisher ? ', ' : '') : '') + (r.publisher ? r.publisher : '');
           if (r.volume || r.issue || r.pages)
@@ -94,7 +100,7 @@ layout: supply
           if (r.status === 'Overdue' || r.status === 'Cancelled') {
             body += '<br><b>' + r.status + '</b>';
           } else {
-            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '" style="width:24%;">';
+            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '">';
             var sopts = ['In progress', 'Awaiting Peter', 'Done'];
             if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
             for (var s in sopts) {
@@ -121,7 +127,7 @@ layout: supply
         if (_first && res.aggregations) {
           _first = false;
           for (var f in res.aggregations) {
-            var fl = '<select class="_oab_form filter" id="' + f + '"><option value="">Filter by ' + f + '</option>';
+            var fl = '<select class="_oab_form filter" id="' + f + '" style="max-width:24%;"><option value="">Filter by ' + f + '</option>';
             for (var b in res.aggregations[f].buckets) {
               fl += '<option>' + res.aggregations[f].buckets[b].key + '</option>';
             }
