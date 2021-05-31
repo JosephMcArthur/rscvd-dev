@@ -78,9 +78,22 @@ layout: supply
           for ( var k in r ) r[k] = decodeURIComponent(r[k]); // clean up for old test data
           body += '<tr><td>';
           var needsa = false;
+          if (typeof r.doi === 'number') r.doi = r.doi.toString();
           if (r.doi && r.doi.startsWith('10.')) {
             needsa = true;
             body += '<a target="_blank" href="https://doi.org/' + r.doi + '">';
+          } else if (r.pmid || r.doi) {
+            if (!r.pmid) {
+              var rd = r.doi.trim().toLowerCase().replace('pmid', '');
+              if (rd.length < 10 && !isNaN(parseInt(rd))) r.pmid = rd;
+            }
+            if (r.pmid) {
+              needsa = true;
+              body += '<a target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/' + r.pmid + '">';
+            }
+          } else if (r.atitle || r.title) {
+            needsa = true;
+            body += '<a target="_blank" href="https://scholar.google.com/scholar?q=' + encodeURIComponent(r.atitle ? r.atitle : r.title) + '">';
           }
           body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
           if (r.year || r.publisher || (r.title && r.atitle))
