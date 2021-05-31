@@ -2,21 +2,25 @@
 layout: default
 ---
 
-<p class="controls" style="display: none;">
-  Show <input type="radio" name="types" class="types" value="book"> books
-  or <input type="radio" name="types" class="types" value="paper"> papers
-</p>
-
-<p>
-  <a class="pradmLogout" href="#" style="display: none;">Logout</a>
-</p>
-
-<div id="filters" class="controls" style="display: none;"></div>
-
 <div id="login" style="display: none;">
+  <p>Please enter your email address to begin login, then enter the token number that will be emailed to you.</p>
   <input autofocus id="pradmEmail" class="pradmEmail _oab_form" type="text" name="email" placeholder="email">
   <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
+
+<div class="options"> <!--  style="display: none;" -->
+  <p>
+    Show <input type="radio" name="types" class="types" value="book"> books
+    or <input type="radio" name="types" class="types" value="paper"> papers
+  </p>
+
+  <div id="filters"></div>
+</div>
+
+<p class="controls" style="text-align:right; display: none;">
+  <a id="options" href="#">Options</a>
+  <a class="pradmLogout" href="#">Logout</a>
+</p>
 
 <table>
   <thead><tr></tr></thead>
@@ -91,7 +95,7 @@ layout: default
             body += '<br><b>' + r.status + '</b>';
           } else {
             body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '">';
-            var sopts = ['In progress', 'Awaiting Peter', 'Provided', 'Done'];
+            var sopts = ['In progress', 'Awaiting Peter', 'Done'];
             if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
             for (var s in sopts) {
               var st = sopts[s];
@@ -147,6 +151,7 @@ layout: default
     //_search();
   });
   pradm.listen("change", '.types', _search);
+  pradm.on("click", '#options', function() { pradm.toggle('.options'); });
 
   var _polls = undefined;
   var _lastpoll = Date.now();
@@ -176,7 +181,7 @@ layout: default
   };
   
   var _state_hide = function(el) {
-    if (['Provided', 'Done'].indexOf(el.value) !== -1) {
+    if (['Done'].indexOf(el.value) !== -1) {
       pradm.class(el.closest('tr'), 'alert');
       setTimeout(function() {
         pradm.remove(el.closest('tr'));
