@@ -17,10 +17,24 @@ layout: supply
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
+    <input type="text" name="resolver" id="resolver" class="hasresolver" style="width: 24%; display: none;">
   </p>
 
   <div id="filters"></div>
 </div>
+
+<p class="getresolver" style="display: none;">
+  <a class="showresolver" href="#">Do you have an institutional link resolver?</a>
+</p>
+<p class="resolver" style="display: none;">
+  If you are at an institution that has a link resolver, you can provide the URL for it here if you know it. 
+  Then we can search the requests on your resolver and filter them to only show ones you will have access to.
+  <input type="text" name="enterresolver" class="_oab_form enterresolver" placeholder="Enter your resolver URL here">
+  <input type="checkbox" name="noresolver" class="noresolver"> I don't have a link resolver URL to provide
+</p>
+<p class="hasresolver" style="display: none;">
+  <input type="checkbox" name="onlyresolved" class="onlyresolved" checked> Only show items your link resolver says you have access to
+</p>
 
 <table>
   <thead><tr></tr></thead>
@@ -32,7 +46,7 @@ layout: supply
 
 
 <script>
-  window.api = 'https://bgb.lvatn.com';
+  window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bgb.lvatn.com' : 'https://paradigm.oa.works';
   window.pradm = {};
   window.pradm.api = window.api;
 </script>
@@ -48,6 +62,79 @@ layout: supply
   var _from = 0;
   var _size = 50;
   var _paging = false;
+  var _user_resolver = false; // set the logged in users resolver here, and use it to limit search scope, unless they uncheck the resolver box
+  var _construct = function(r) {
+    if (r._source) {
+      var rid = r._id;
+      r = r._source;
+      if (!r._id) r._id = rid;
+    }
+    for ( var k in r ) r[k] = decodeURIComponent(r[k]); // clean up for old test data
+    var body = '<tr><td>';
+    var needsa = false;
+    if (typeof r.doi === 'number') r.doi = r.doi.toString();
+    if (r.doi && r.doi.startsWith('10.')) {
+      needsa = true;
+      body += '<a target="_blank" href="https://doi.org/' + r.doi + '">';
+    } else if (r.pmid || r.doi) {
+      if (!r.pmid) {
+        var rd = r.doi.trim().toLowerCase().replace('pmid', '');
+        if (rd.length < 10 && !isNaN(parseInt(rd))) r.pmid = rd;
+      }
+      if (r.pmid) {
+        needsa = true;
+        body += '<a target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/' + r.pmid + '">';
+      }
+    } else if (r.atitle || r.title) {
+      needsa = true;
+      body += '<a target="_blank" href="https://scholar.google.com/scholar?q=' + encodeURIComponent(r.atitle ? r.atitle : r.title) + '">';
+    }
+    body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
+    if (r.year || r.publisher || (r.title && r.atitle))
+      body += '<br>' + (r.year ? r.year + ' ' : '') + (r.title && r.atitle ? '<i><a class="title" href="#">' + r.title + '</a></i>' + (r.publisher ? ', ' : '') : '') + (r.publisher ? r.publisher : '');
+    if (r.volume || r.issue || r.pages)
+      body += '<br>' + (r.volume ? 'vol: ' + r.volume + ' ' : '') + (r.issue ? 'issue: ' + r.issue + ' ' : '') + (r.pages ? 'page(s): ' + r.pages : '');
+    if (r.doi || r.issn || r.isbn)
+      body += '<br>' + (r.doi && r.doi.startsWith('10.') ? '<a target="_blank" href="https://doi.org/' + r.doi + '">' + r.doi + '</a> ' : '') + (r.issn ? ' ISSN ' + r.issn : '') + (r.isbn ? ' ISBN ' + r.isbn : '');
+    body += '</td><td>';
+
+    body += '<div class="verified"' + (r.verified ? '' : ' style="display:none;"') + '>';
+    body += '<a href="mailto:' + r.email + '?subject=RSCVD%20Request%20Receipt&body=';
+
+    var msg = 'Hi ' + r.name + ',\n\nWe got your request of:\n\nTitle: ' + (r.atitle ? r.atitle : r.title) + '\nReference (if provided): ' + r.reference + '\n\n';
+    msg += 'If at any point you no longer need this item, please <a href="https://dev.rscvd.org/update?cancel=' + r._id + '">cancel your request</a>, it only takes a second.\n\n';
+    msg += 'Our team of volunteers will try and fill your request as soon as possible. If you would like to thank us, please consider <a href="https://rscvd.org/volunteer">joining us in helping supply requests</a>.';
+
+    body += encodeURIComponent(msg);
+    body += '">' + r.email + '</a>';
+    if (r['needed-by']) {
+      body += '<br>Required by ' + r['needed-by'].split('-').reverse().join('/');
+      if (r.reference) body += '<br>Ref: ' + r.reference;
+    }
+    if (r.status === 'Overdue' || r.status === 'Cancelled') {
+      body += '<br><b>' + r.status + '</b>';
+    } else {
+      body += '<br><select class="_oab_form status ' + r._id + '">';
+      var sopts = ['In progress', 'Awaiting Peter', 'Done'];
+      if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
+      for (var s in sopts) {
+        var st = sopts[s];
+        body += '<option' + (r.status === st ? ' selected' : '') + '>' + st + '</option>';
+      }
+      body += '</select></div>';
+    }
+
+    body += '<div class="denied"' + (r.verified === false ? '' : ' style="display:none;""') + '><span style="color: red;">' + r.email + '</span><br>Request denied</div>';
+
+    body += '<div class="verifier ' + r.email + '"' + (r.verified === undefined ? '' : ' style="display:none;"') + '>';
+    body += (r.name ? r.name : r.email) + (r.organization ? (r.name ? ', ' : '') + r.organization : '');
+    var nn = r.name ? r.name.split(' ')[0] : r.email.split('@')[0];
+    body += '<br><a class="button action verify ' + r.email + '" href="#">Approve ' + nn + '</a><br><a class="button warning verify deny ' + r.email + '" href="#">Deny ' + nn + '</a>';
+    body += '</div>';
+
+    body += '</td></tr>';
+    return body;
+  }
   var _search = function() {
     if (!_paging) {
       _max = false;
@@ -73,73 +160,7 @@ layout: supply
       success: function(res) {
         var body = '';
         if (res.hits.hits.length < _size) _max = true;
-        for (var h in res.hits.hits) {
-          var r = res.hits.hits[h]._source;
-          for ( var k in r ) r[k] = decodeURIComponent(r[k]); // clean up for old test data
-          body += '<tr><td>';
-          var needsa = false;
-          if (typeof r.doi === 'number') r.doi = r.doi.toString();
-          if (r.doi && r.doi.startsWith('10.')) {
-            needsa = true;
-            body += '<a target="_blank" href="https://doi.org/' + r.doi + '">';
-          } else if (r.pmid || r.doi) {
-            if (!r.pmid) {
-              var rd = r.doi.trim().toLowerCase().replace('pmid', '');
-              if (rd.length < 10 && !isNaN(parseInt(rd))) r.pmid = rd;
-            }
-            if (r.pmid) {
-              needsa = true;
-              body += '<a target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/' + r.pmid + '">';
-            }
-          } else if (r.atitle || r.title) {
-            needsa = true;
-            body += '<a target="_blank" href="https://scholar.google.com/scholar?q=' + encodeURIComponent(r.atitle ? r.atitle : r.title) + '">';
-          }
-          body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
-          if (r.year || r.publisher || (r.title && r.atitle))
-            body += '<br>' + (r.year ? r.year + ' ' : '') + (r.title && r.atitle ? '<i><a class="title" href="#">' + r.title + '</a></i>' + (r.publisher ? ', ' : '') : '') + (r.publisher ? r.publisher : '');
-          if (r.volume || r.issue || r.pages)
-            body += '<br>' + (r.volume ? 'vol: ' + r.volume + ' ' : '') + (r.issue ? 'issue: ' + r.issue + ' ' : '') + (r.pages ? 'page(s): ' + r.pages : '');
-          if (r.doi || r.issn || r.isbn)
-            body += '<br>' + (r.doi && r.doi.startsWith('10.') ? '<a target="_blank" href="https://doi.org/' + r.doi + '">' + r.doi + '</a> ' : '') + (r.issn ? ' ISSN ' + r.issn : '') + (r.isbn ? ' ISBN ' + r.isbn : '');
-          body += '</td><td>';
-
-          body += '<div class="verified"' + (r.verified ? '' : ' style="display:none;"') + '>';
-          body += '<a href="mailto:' + r.email + '?subject=RSCVD%20Request%20Receipt&body=';
-
-          var msg = 'Hi ' + r.name + ',\n\nWe got your request of:\n\nTitle: ' + (r.atitle ? r.atitle : r.title) + '\nReference (if provided): ' + r.reference + '\n\n';
-          msg += 'If at any point you no longer need this item, please <a href="https://dev.rscvd.org/update?cancel=' + res.hits.hits[h]._id + '">cancel your request</a>, it only takes a second.\n\n';
-          msg += 'Our team of volunteers will try and fill your request as soon as possible. If you would like to thank us, please consider <a href="https://rscvd.org/volunteer">joining us in helping supply requests</a>.';
-
-          body += encodeURIComponent(msg);
-          body += '">' + r.email + '</a>';
-          if (r['needed-by']) {
-            body += '<br>Required by ' + r['needed-by'].split('-').reverse().join('/');
-            if (r.reference) body += '<br>Ref: ' + r.reference;
-          }
-          if (r.status === 'Overdue' || r.status === 'Cancelled') {
-            body += '<br><b>' + r.status + '</b>';
-          } else {
-            body += '<br><select class="_oab_form status ' + res.hits.hits[h]._id + '">';
-            var sopts = ['In progress', 'Awaiting Peter', 'Done'];
-            if (!r.status || sopts.indexOf(r.status) === -1) body += '<option value="">Set a status...</option>';
-            for (var s in sopts) {
-              var st = sopts[s];
-              body += '<option' + (r.status === st ? ' selected' : '') + '>' + st + '</option>';
-            }
-            body += '</select></div>';
-          }
-
-          body += '<div class="denied"' + (r.verified === false ? '' : ' style="display:none;""') + '><span style="color: red;">' + r.email + '</span><br>Request denied</div>';
-
-          body += '<div class="verifier ' + r.email + '"' + (r.verified === undefined ? '' : ' style="display:none;"') + '>';
-          body += (r.name ? r.name : r.email) + (r.organization ? (r.name ? ', ' : '') + r.organization : '');
-          var nn = r.name ? r.name.split(' ')[0] : r.email.split('@')[0];
-          body += '<br><a class="button action verify ' + r.email + '" href="#">Approve ' + nn + '</a><br><a class="button warning verify deny ' + r.email + '" href="#">Deny ' + nn + '</a>';
-          body += '</div>';
-
-          body += '</td></tr>';
-        }
+        for (var h in res.hits.hits) body = _construct(res.hits.hits[h]);
         pradm.append('#results', body);
         
         if (_first) {
@@ -239,7 +260,18 @@ layout: supply
     });
   });
   
+  var _resolver = function() {
+    _user_resolver = pradm.cookie('resolver');
+    if (_user_resolver) {
+      pradm.set('#resolver', resolver);
+      pradm.show('.hasresolver');
+    } else {
+      pradm.show('.getresolver');
+    }
+  }
+  
   pradm.afterLogin = function() {
+    _resolver();
     _search();
     setInterval(function() {
       _lastpoll = Date.now();
@@ -248,6 +280,9 @@ layout: supply
         success: function(res) {
           _polls = res;
           pradm.each('.verifier', function(el) { _vd(el); });
+          for (var rec in _polls.new) {
+            if (!pradm.exists('#' + rec._id)) pradm.prepend(_construct(rec));
+          }
           for ( var s in _polls.status ) {
             var el = pradm.exists('.' + s);
             if (el && pradm.has(el, '.status') && pradm.val(el) !== res.status[s]) {
