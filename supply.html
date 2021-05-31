@@ -12,8 +12,8 @@ layout: supply
   <a id="options" href="#">Options</a>
 </div>
 
-<div class="options" style="display: none; margin-top: 40px; margin-bottom: 5px;">
-  <p style="text-align:right; margin-bottom: -50px;"><a class="pradmLogout" href="#">Logout</a></p>
+<div class="options" style="display: none; margin-top: 35px; margin-bottom: 5px;">
+  <p style="text-align:right; margin-bottom: -50px;"><a id="pradmLogout" href="#">Logout</a></p>
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
@@ -135,7 +135,7 @@ layout: supply
           body += '<div class="verifier ' + r.email + '"' + (r.verified === undefined ? '' : ' style="display:none;"') + '>';
           body += (r.name ? r.name : r.email) + (r.organization ? (r.name ? ', ' : '') + r.organization : '');
           var nn = r.name ? r.name.split(' ')[0] : r.email.split('@')[0];
-          body += '<br><a class="button action verify ' + r.email + '" href="#">Approve ' + nn + '</a> <a class="button warning verify deny ' + r.email + '" href="#">Deny ' + nn + '</a>';
+          body += '<br><a class="button action verify ' + r.email + '" href="#">Approve ' + nn + '</a><br><a class="button warning verify deny ' + r.email + '" href="#">Deny ' + nn + '</a>';
           body += '</div>';
 
           body += '</td></tr>';
