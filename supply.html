@@ -26,14 +26,14 @@ layout: supply
 <p class="getresolver" style="display: none;">
   <a class="showresolver" href="#">Do you have an institutional link resolver?</a>
 </p>
-<p class="resolver" style="display: none;">
+<p class="requestresolver" style="display: none;">
   If you are at an institution that has a link resolver, you can provide the URL for it here if you know it. 
   Then we can search the requests on your resolver and filter them to only show ones you will have access to.
   <input type="text" name="enterresolver" class="_oab_form enterresolver" placeholder="Enter your resolver URL here">
   <input type="checkbox" name="noresolver" class="noresolver"> I don't have a link resolver URL to provide
 </p>
 <p class="hasresolver" style="display: none;">
-  <input type="checkbox" name="onlyresolved" class="onlyresolved" checked> Only show items your link resolver says you have access to
+  <input type="checkbox" name="onlyresolved" class="onlyresolved"> Only show items your link resolver says you have access to
 </p>
 
 <table>
@@ -62,7 +62,7 @@ layout: supply
   var _from = 0;
   var _size = 50;
   var _paging = false;
-  var _user_resolver = false; // set the logged in users resolver here, and use it to limit search scope, unless they uncheck the resolver box
+  var _user_resolver = undefined; // set the logged in users resolver here, and use it to limit search scope, unless they uncheck the resolver box
   var _construct = function(r) {
     if (r._source) {
       var rid = r._id;
@@ -260,13 +260,35 @@ layout: supply
     });
   });
   
+  var _set_resolver = function(r) {
+    pradm.hide('.requestresolver');
+    pradm.cookie('resolver', r);
+    if (r !== 'NONE') {
+      _user_resolver = r;
+      pradm.set('#resolver', r);
+      pradm.check('.onlyresolved');
+    }
+    pradm.show('.hasresolver');
+  }
   var _resolver = function() {
-    _user_resolver = pradm.cookie('resolver');
-    if (_user_resolver) {
-      pradm.set('#resolver', resolver);
-      pradm.show('.hasresolver');
+    var r = pradm.cookie('resolver');
+    if (r) {
+      _set_resolver(r);
+      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
     } else {
       pradm.show('.getresolver');
+      pradm.listen('click', '#showresolver', function(e) {
+        e.preventDefault();
+        pradm.hide('.getresolver');
+        pradm.show('.requestresolver');
+      });
+      pradm.listen('change', '.noresolver', function() { 
+        pradm.hide('.requestresolver');
+        pradm.cookie('resolver', 'NONE');
+        _user_resolver = undefined;
+        _search();
+      });
+      pradm.listen('enter', '.enterresolver', function() { _set_resolver(pradm.get('.enterresolver')); _search(); });
     }
   }
   
