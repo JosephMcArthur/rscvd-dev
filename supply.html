@@ -158,10 +158,8 @@ layout: supply
     if (_first) url += '&terms=status'; // email,title,
     pradm.ajax(url, {
       success: function(res) {
-        var body = '';
         if (res.hits.hits.length < _size) _max = true;
-        for (var h in res.hits.hits) body = _construct(res.hits.hits[h]);
-        pradm.append('#results', body);
+        for (var h in res.hits.hits) pradm.append('#results', _construct(res.hits.hits[h]));
         
         if (_first) {
           _first = false;
@@ -277,7 +275,7 @@ layout: supply
       pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
     } else {
       pradm.show('.getresolver');
-      pradm.listen('click', '#showresolver', function(e) {
+      pradm.listen('click', '.showresolver', function(e) {
         e.preventDefault();
         pradm.hide('.getresolver');
         pradm.show('.requestresolver');
