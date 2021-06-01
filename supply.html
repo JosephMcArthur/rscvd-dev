@@ -288,7 +288,7 @@ layout: supply
       });
       pradm.listen('change', '.noresolver', function() { _set_resolver('NONE'); });
       pradm.listen('enter', '.enterresolver', function() { _set_resolver(pradm.get('.enterresolver')); });
-      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
+      pradm.listen('enter', '#resolver', function() { console.log('resolve'); _set_resolver(pradm.get('#resolver')); });
       var r = pradm.cookie('resolver');
       if (r) {
         _set_resolver(r);
