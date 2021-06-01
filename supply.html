@@ -20,7 +20,7 @@ layout: supply
   </p>
 
   <div id="filters">
-    <input type="text" name="resolver" id="resolver" class="_oab_form" style="max-width: 24%; height: 34px; display: inline;" placeholder="Institutional link resolver URL">
+    <input type="text" name="resolver" id="resolver" class="_oab_form" style="max-width: 24%; padding: 0px 12px; display: inline;" placeholder="Institutional link resolver URL">
   </div>
 </div>
 
@@ -144,7 +144,7 @@ layout: supply
       pradm.html('#results', '');
     }
     pradm.show('.pradmLoading');
-    var url = api + '/svc/rscvd';
+    var url = '/svc/rscvd';
     var email = pradm.get('#email');
     var qry = 'email:' + (email ? '"' + email + '"' : '*');
     var title = pradm.get('#title');
@@ -244,7 +244,7 @@ layout: supply
     var deny = cls.indexOf("deny") !== -1;
     pradm.html(el, (deny ? "Deny" : "Approv") + 'ing...');
     var email = cls.pop();
-    pradm.ajax(api + '/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email, {
+    pradm.ajax('/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email, {
       success: function(res) {
         if (res) pradm.each('.verifier', function(el) { _vd(el, email, deny); });
       }
@@ -253,7 +253,7 @@ layout: supply
   pradm.on("change", ".status", function(e) {
     var el = e.target;
     var cls = pradm.classes(el);
-    pradm.ajax(api + '/svc/rscvd/status/' + cls.pop() + "/" + el.value, {
+    pradm.ajax('/svc/rscvd/status/' + cls.pop() + "/" + el.value, {
       success: function(res) {
         if (res) _state_hide(el);
       }
@@ -273,7 +273,7 @@ layout: supply
     }
     pradm.show('#resolver');
     _search();
-  }
+  };
 
   pradm.afterLogin = function() {
     var r = pradm.cookie('resolver');
@@ -294,7 +294,7 @@ layout: supply
 
     setInterval(function() {
       _lastpoll = Date.now();
-      var url = api + '/svc/rscvd/poll/' + (_lastpoll - 300000);
+      var url = '/svc/rscvd/poll/' + (_lastpoll - 300000);
       pradm.ajax(url, {
         success: function(res) {
           _polls = res;
