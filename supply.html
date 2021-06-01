@@ -148,7 +148,7 @@ layout: supply
     var email = pradm.get('#email');
     var qry = 'email:' + (email ? '"' + email + '"' : '*');
     var title = pradm.get('#title');
-    qry += ' AND ' + (title ? 'title:"' + title + '"' : '(title:* OR atitle:*)');
+    qry += ' AND ' + (title ? 'title.keyword:"' + title + '"' : '(title:* OR atitle:*)');
     var status = pradm.get('#status');
     if (status !== 'All') {
       qry += ' AND ' + (status ? 'status:"' + status + '"' : '(status:"Awaiting verification" OR status:"Verified" OR status:"In progress" OR status:"Awaiting Peter")');
