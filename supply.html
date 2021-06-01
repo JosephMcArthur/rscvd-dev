@@ -198,7 +198,7 @@ layout: supply
     e.preventDefault();
     pradm.set('#title', e.target.innerHTML);
     pradm.show('#title');
-    //_search();
+    _search();
   });
   pradm.listen("change", '.types', _search);
   pradm.on("click", '#options', function(e) { e.preventDefault(); pradm.toggle('.options'); });
