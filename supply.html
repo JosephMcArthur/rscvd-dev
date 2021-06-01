@@ -20,7 +20,7 @@ layout: supply
   </p>
 
   <div id="filters">
-    <input type="text" name="resolver" id="resolver" class="_oab_form" style="width: 24%; display: none;" placeholder="Institutional link resolver URL">
+    <input type="text" name="resolver" id="resolver" class="_oab_form" style="max-width: 24%; display: inline;" placeholder="Institutional link resolver URL">
   </div>
 </div>
 
@@ -57,6 +57,7 @@ layout: supply
 
 <script>
   /* global pradm */
+  pradm.hide('#filters'); // do this here so that it can be set with a non-standard display: inline above first
   
   var _first = true;
   var _max = false;
