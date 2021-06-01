@@ -268,34 +268,30 @@ layout: supply
       pradm.set('#resolver', r);
       pradm.check('.onlyresolved');
       pradm.show('.hasresolver');
+    } else {
+      _user_resolver = undefined;
     }
     pradm.show('#resolver');
+    _search();
   }
-  var _resolver = function() {
+
+  pradm.afterLogin = function() {
     var r = pradm.cookie('resolver');
     if (r) {
       _set_resolver(r);
       pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
     } else {
-      pradm.show('.getresolver');
+      //pradm.show('.getresolver'); TODO UNCOMMENT THIS ONCE READY TO ENABLE LINK RESOLVER FOR USERS
       pradm.listen('click', '.showresolver', function(e) {
         e.preventDefault();
         pradm.hide('.getresolver');
         pradm.show('.requestresolver');
       });
-      pradm.listen('change', '.noresolver', function() { 
-        pradm.hide('.requestresolver');
-        pradm.cookie('resolver', 'NONE');
-        _user_resolver = undefined;
-        _search();
-      });
-      pradm.listen('enter', '.enterresolver', function() { _set_resolver(pradm.get('.enterresolver')); _search(); });
+      pradm.listen('change', '.noresolver', function() { _set_resolver('NONE'); });
+      pradm.listen('enter', '.enterresolver', function() { _set_resolver(pradm.get('.enterresolver')); });
+      _search();
     }
-  }
-  
-  pradm.afterLogin = function() {
-    _resolver();
-    _search();
+
     setInterval(function() {
       _lastpoll = Date.now();
       var url = api + '/svc/rscvd/poll/' + (_lastpoll - 300000);
