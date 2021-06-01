@@ -275,13 +275,10 @@ layout: supply
     _search();
   };
 
+  var _doneafter = false;
   pradm.afterLogin = function() {
-    var r = pradm.cookie('resolver');
-    if (r) {
-      _set_resolver(r);
-      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
-    } else {
-      //pradm.show('.getresolver'); TODO UNCOMMENT THIS ONCE READY TO ENABLE LINK RESOLVER FOR USERS
+    if (!_doneafter) {
+      _doneafter = true;
       pradm.listen('click', '.showresolver', function(e) {
         e.preventDefault();
         pradm.hide('.getresolver');
@@ -289,30 +286,37 @@ layout: supply
       });
       pradm.listen('change', '.noresolver', function() { _set_resolver('NONE'); });
       pradm.listen('enter', '.enterresolver', function() { _set_resolver(pradm.get('.enterresolver')); });
-      _search();
-    }
-
-    setInterval(function() {
-      _lastpoll = Date.now();
-      var url = '/svc/rscvd/poll/' + (_lastpoll - 300000);
-      pradm.ajax(url, {
-        success: function(res) {
-          _polls = res;
-          pradm.each('.verifier', function(el) { _vd(el); });
-          for (var rec in _polls.new) {
-            if (!pradm.exists('#' + rec._id)) pradm.prepend(_construct(rec));
-          }
-          for ( var s in _polls.status ) {
-            var el = pradm.exists('.' + s);
-            if (el && pradm.has(el, '.status') && pradm.val(el) !== res.status[s]) {
-              pradm.set(el, res.status[s]);
-              _state_hide(el);
+      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
+      var r = pradm.cookie('resolver');
+      if (r) {
+        _set_resolver(r);
+      } else {
+        //pradm.show('.getresolver'); TODO UNCOMMENT THIS ONCE READY TO ENABLE LINK RESOLVER FOR USERS
+        _search();
+      }
+  
+      setInterval(function() {
+        _lastpoll = Date.now();
+        var url = '/svc/rscvd/poll/' + (_lastpoll - 300000);
+        pradm.ajax(url, {
+          success: function(res) {
+            _polls = res;
+            pradm.each('.verifier', function(el) { _vd(el); });
+            for (var rec in _polls.new) {
+              if (!pradm.exists('#' + rec._id)) pradm.prepend(_construct(rec));
+            }
+            for ( var s in _polls.status ) {
+              var el = pradm.exists('.' + s);
+              if (el && pradm.has(el, '.status') && pradm.val(el) !== res.status[s]) {
+                pradm.set(el, res.status[s]);
+                _state_hide(el);
+              }
             }
           }
-        }
-      });
-    }, 10000);
-  }
+        });
+      }, 10000);
+    }
+  };
   if (pradm.loggedin()) {
     pradm.afterLogin();
   } else {
