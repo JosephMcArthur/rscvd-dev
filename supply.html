@@ -8,7 +8,7 @@ layout: supply
   <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
 
-<div class="controls" style="float: right;">
+<div class="controls" style="display: none; float: right;">
   <a id="options" href="#">Options</a>
 </div>
 
@@ -64,7 +64,6 @@ layout: supply
   var _from = 0;
   var _size = 50;
   var _paging = false;
-  var _user_resolver = undefined; // set the logged in users resolver here, and use it to limit search scope, unless they uncheck the resolver box
   var _construct = function(r) {
     if (r._source) {
       var rid = r._id;
@@ -154,8 +153,9 @@ layout: supply
       qry += ' AND ' + (status ? 'status:"' + status + '"' : '(status:"Awaiting verification" OR status:"Verified" OR status:"In progress" OR status:"Awaiting Peter")');
     }
     pradm.each('.types', function(el) {
-      if (pradm.checked(el)) qry += ' AND sid:"' + pradm.get(el) + '"';
+      if (pradm.checked(el)) qry += ' AND type:"' + pradm.get(el) + '"';
     });
+    if (pradm.checked('.onlyresolver') && pradm.get('#resolver')) qry += ' AND resolves:"' + pradm.get('#resolver') + '"';
     url += '?q=' + qry + '&sort=createdAt:desc&size=' + _size + (_from ? '&from=' + _from : '');
     if (_first) url += '&terms=status,title'; // could get others such as email. Title will be hidden, but still provided for filtering convenience from title links in results
     pradm.ajax(url, {
@@ -266,17 +266,20 @@ layout: supply
     pradm.hide('.requestresolver');
     pradm.cookie('resolver', r);
     if (r !== 'NONE') {
-      _user_resolver = r;
       pradm.set('#resolver', r);
       pradm.check('.onlyresolved');
       pradm.show('.hasresolver');
     } else {
-      _user_resolver = undefined;
+      pradm.set('#resolver', '');
     }
-    pradm.show('#resolver');
+    //pradm.ajax('/svc/rscvd/resolver/' + r);
+    //pradm.show('#resolver');
     _search();
   };
 
+  pradm.afterLogout = function() {
+    window.location.reload();
+  };
   var _doneafter = false;
   pradm.afterLogin = function() {
     if (!_doneafter) {
