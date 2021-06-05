@@ -273,7 +273,7 @@ layout: supply
     if (pradm.checked('#onlyresolved')) {
       pradm.html('#results', '');
       pradm.show('.pradmLoading');
-      pradm.ajax('/svc/rscvd/resolves?resolver=' + pradm.get('#onlyresolved'), {
+      pradm.ajax('/svc/rscvd/resolves?resolver=' + pradm.get('#resolver'), {
         success: function() {
           _search();
         }
