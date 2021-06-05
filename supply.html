@@ -20,13 +20,16 @@ layout: supply
   </p>
 
   <div id="filters"></div>
-</div>
 
-<p class="requestresolver" style="display: none;">
-  If you are at an institution that has a link resolver, you can provide the URL for it here, then check the box to filter the requests. 
-  <input type="text" name="resolver" id="resolver" class="_oab_form" placeholder="Type your resolver URL then press enter">
-  <input type="checkbox" name="onlyresolved" id="onlyresolved" style="display: none;"> Only show items available on your link resolver
-</p>
+  <div class="requestresolver" style="display: none;">
+    <p>If you are at an institution that has a link resolver, you can provide the URL for it here.</p>
+    <input type="text" name="resolver" id="resolver" class="_oab_form" placeholder="Type your resolver URL then press enter" style="height: 34px;">
+    <p class="onlyresolved">
+      <input type="checkbox" name="onlyresolved" id="onlyresolved" style="display: none;"> Only show items available on your link resolver
+    </p>
+  </div>
+
+</div>
 
 <table>
   <thead><tr></tr></thead>
@@ -256,11 +259,11 @@ layout: supply
     pradm.cookie('resolver', r);
     if (r) {
       pradm.set('#resolver', r);
-      pradm.show('#onlyresolved');
+      pradm.show('.onlyresolved');
     } else {
       pradm.set('#resolver', '');
       pradm.uncheck('#onlyresolved');
-      pradm.hide('#onlyresolved');
+      pradm.hide('.onlyresolved');
     }
     _search();
   };
