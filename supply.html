@@ -288,6 +288,7 @@ layout: supply
   };
   var _doneafter = false;
   pradm.afterLogin = function() {
+    pradm.hide('#login');
     if (!_doneafter) {
       _doneafter = true;
       pradm.show('.requestresolver');
