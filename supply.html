@@ -19,22 +19,13 @@ layout: supply
     or <input type="radio" name="types" class="types" value="paper"> papers
   </p>
 
-  <div id="filters">
-    <input type="text" name="resolver" id="resolver" class="_oab_form" style="max-width: 24%; padding: 0px 12px; display: inline;" placeholder="Institutional link resolver URL">
-  </div>
+  <div id="filters"></div>
 </div>
 
-<p class="getresolver" style="display: none;">
-  <a class="showresolver" href="#">Do you have an institutional link resolver?</a>
-</p>
 <p class="requestresolver" style="display: none;">
-  If you are at an institution that has a link resolver, you can provide the URL for it here if you know it. 
-  Then we can search the requests on your resolver and filter them to only show ones you will have access to.
-  <input type="text" name="enterresolver" class="_oab_form enterresolver" placeholder="Enter your resolver URL here">
-  <input type="checkbox" name="noresolver" class="noresolver"> I don't have a link resolver URL to provide
-</p>
-<p class="hasresolver" style="display: none;">
-  <input type="checkbox" name="onlyresolved" class="onlyresolved"> Only show items your link resolver says you have access to
+  If you are at an institution that has a link resolver, you can provide the URL for it here, then check the box to filter the requests. 
+  <input type="text" name="resolver" id="resolver" class="_oab_form" placeholder="Type your resolver URL then press enter">
+  <input type="checkbox" name="onlyresolved" id="onlyresolved" style="display: none;"> Only show items available on your link resolver
 </p>
 
 <table>
@@ -57,8 +48,7 @@ layout: supply
 
 <script>
   /* global pradm */
-  pradm.hide('#resolver'); // do this here so that it can be set with a non-standard display: inline above first
-  
+
   var _first = true;
   var _max = false;
   var _from = 0;
@@ -155,7 +145,7 @@ layout: supply
     pradm.each('.types', function(el) {
       if (pradm.checked(el)) qry += ' AND type:"' + pradm.get(el) + '"';
     });
-    if (pradm.checked('.onlyresolver') && pradm.get('#resolver')) qry += ' AND resolves:"' + pradm.get('#resolver') + '"';
+    if (pradm.checked('#onlyresolved') && pradm.get('#resolver')) qry += ' AND resolves:"' + pradm.get('#resolver') + '"';
     url += '?q=' + qry + '&sort=createdAt:desc&size=' + _size + (_from ? '&from=' + _from : '');
     if (_first) url += '&terms=status,title'; // could get others such as email. Title will be hidden, but still provided for filtering convenience from title links in results
     pradm.ajax(url, {
@@ -263,19 +253,30 @@ layout: supply
   });
   
   var _set_resolver = function(r) {
-    pradm.hide('.requestresolver');
     pradm.cookie('resolver', r);
-    if (r !== 'NONE') {
+    if (r) {
       pradm.set('#resolver', r);
-      pradm.check('.onlyresolved');
-      pradm.show('.hasresolver');
+      pradm.show('#onlyresolved');
     } else {
       pradm.set('#resolver', '');
+      pradm.uncheck('#onlyresolved');
+      pradm.hide('#onlyresolved');
     }
-    //pradm.ajax('/svc/rscvd/resolver/' + r);
-    //pradm.show('#resolver');
     _search();
   };
+  pradm.on('change', '#onlyresolved', function() {
+    if (pradm.checked('#onlyresolved')) {
+      pradm.html('#results', '');
+      pradm.show('.pradmLoading');
+      pradm.ajax('/svc/rscvd/resolves?resolver=' + pradm.get('#onlyresolved'), {
+        success: function() {
+          _search();
+        }
+      });
+    } else {
+      _search();
+    }
+  });
 
   pradm.afterLogout = function() {
     window.location.reload();
@@ -284,19 +285,12 @@ layout: supply
   pradm.afterLogin = function() {
     if (!_doneafter) {
       _doneafter = true;
-      pradm.listen('click', '.showresolver', function(e) {
-        e.preventDefault();
-        pradm.hide('.getresolver');
-        pradm.show('.requestresolver');
-      });
-      pradm.listen('change', '.noresolver', function() { _set_resolver('NONE'); });
-      pradm.listen('enter', '.enterresolver', function() { _set_resolver(pradm.get('.enterresolver')); });
-      pradm.listen('enter', '#resolver', function() { console.log('resolve'); _set_resolver(pradm.get('#resolver')); });
+      pradm.show('.requestresolver');
+      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
       var r = pradm.cookie('resolver');
       if (r) {
         _set_resolver(r);
       } else {
-        //pradm.show('.getresolver'); TODO UNCOMMENT THIS ONCE READY TO ENABLE LINK RESOLVER FOR USERS
         _search();
       }
   
