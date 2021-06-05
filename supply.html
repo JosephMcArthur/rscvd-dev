@@ -270,11 +270,12 @@ layout: supply
   });
   
   var _set_resolver = function(r) {
-    pradm.cookie('resolver', r);
     if (r) {
+      pradm.cookie('resolver', r);
       pradm.set('#resolver', r);
       pradm.show('.onlyresolved');
     } else {
+      pradm.cookie('resolver', '');
       pradm.set('#resolver', '');
       pradm.uncheck('#onlyresolved');
       pradm.hide('.onlyresolved');
