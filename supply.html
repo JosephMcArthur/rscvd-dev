@@ -64,7 +64,7 @@ layout: supply
       if (!r._id) r._id = rid;
     }
     for ( var k in r ) r[k] = decodeURIComponent(r[k]); // clean up for old test data
-    var body = '<tr><td>';
+    var body = '<tr id="' + r._id + '"><td>';
     var needsa = false;
     if (typeof r.doi === 'number') r.doi = r.doi.toString();
     if (r.doi && r.doi.startsWith('10.')) {
@@ -304,8 +304,8 @@ layout: supply
           success: function(res) {
             _polls = res;
             pradm.each('.verifier', function(el) { _vd(el); });
-            for (var rec in _polls.new) {
-              if (!pradm.exists('#' + rec._id)) pradm.prepend(_construct(rec));
+            for (var r in _polls.new) {
+              if (!pradm.exists('#' + _polls.new[r]._id)) pradm.prepend(_construct(_polls.new[r]));
             }
             for ( var s in _polls.status ) {
               var el = pradm.exists('.' + s);
