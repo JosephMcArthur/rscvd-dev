@@ -6,12 +6,15 @@ layout: default
 
 <p id="cancelling">Cancelling...</p>
 
-<script src="https://bgb.lvatn.com/client/pradm.js"></script>
 <script>
   window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bgb.lvatn.com' : 'https://paradigm.oa.works';
   window.pradm = {};
   window.pradm.api = window.api;
+</script>
 
+<script src="https://bgb.lvatn.com/client/pradm.js"></script>
+
+<script>
   var rid = pradm.params('id');
   if (rid) {
     pradm.ajax('/svc/rscvd/cancel/' + rid, {
