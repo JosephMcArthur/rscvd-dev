@@ -107,12 +107,8 @@ layout: supply
     body += '</td><td>';
 
     body += '<div class="verified"' + (r.verified ? '' : ' style="display:none;"') + '>';
-    body += '<a href="mailto:' + r.email + '?subject=RSCVD%20Request%20Receipt&body=';
-
-    var msg = 'Hi ' + r.name + ',\n\nWe got your request of:\n\nTitle: ' + (r.atitle ? r.atitle : r.title) + '\nReference (if provided): ' + r.reference + '\n\n';
-    msg += 'If at any point you no longer need this item, please <a href="https://dev.rscvd.org/update?cancel=' + r._id + '">cancel your request</a>, it only takes a second.\n\n';
-    msg += 'Our team of volunteers will try and fill your request as soon as possible. If you would like to thank us, please consider <a href="https://rscvd.org/volunteer">joining us in helping supply requests</a>.';
-
+    body += '<a href="mailto:' + r.email + '?subject=RSCVD%20Request&body=';
+    var msg = 'Hi ' + r.name + ',\n\nRegarding your request:\n\nTitle: ' + (r.atitle ? r.atitle : r.title) + '\nReference (if provided): ' + (r.reference ? r.reference : '') + '\n\n';
     body += encodeURIComponent(msg);
     body += '">' + r.email + '</a>';
     if (r['needed-by']) {

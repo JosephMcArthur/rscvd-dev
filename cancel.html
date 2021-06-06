@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<h1>Cancel your request</h1>
+
+<p id="cancelling">Cancelling...</p>
+
+<script src="https://bgb.lvatn.com/client/pradm.js"></script>
+<script>
+  window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bgb.lvatn.com' : 'https://paradigm.oa.works';
+  window.pradm = {};
+  window.pradm.api = window.api;
+
+  var rid = pradm.params('id');
+  if (rid) {
+    pradm.ajax('/svc/rscvd/cancel/' + rid, {
+      success: function(rec) {
+        pradm.html('#cancelling', 'Your request for ' + (rec.atitle ? rec.atitle : (rec.title ? rec.title : rid)) + ' has been cancelled.');
+      }
+    });
+  }
+
+</script>
+
