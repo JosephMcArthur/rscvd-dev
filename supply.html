@@ -319,6 +319,9 @@ layout: supply
             for (var r in _polls.new) {
               if (!pradm.exists('#' + _polls.new[r]._id)) pradm.prepend('#results', _construct(_polls.new[r]));
             }
+            for (var c in _polls.cancel) {
+              if (pradm.exists('#' + _polls.cancel[c])) pradm.remove('#' + _polls.cancel[c]);
+            }
             for ( var s in _polls.status ) {
               var el = pradm.exists('.' + s);
               if (el && pradm.has(el, '.status') && pradm.val(el) !== res.status[s]) {
