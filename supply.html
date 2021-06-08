@@ -23,7 +23,7 @@ layout: supply
   </p>
 
   <div id="filters">
-    <input type="text" id="resolver" class="_oab_form" placeholder="Link resolver URL" style="max-width: 24%; display: inline; height: 34px; padding: 0px 6px;">    
+    <input type="text" name="resolver" id="resolver" class="_oab_form" placeholder="Link resolver URL" style="max-width: 24%; display: inline; height: 34px; padding: 0px 6px;">    
   </div>
 
   <!--
@@ -210,7 +210,7 @@ layout: supply
     pradm.show('#title');
     _search();
   });
-  pradm.listen("change", '.types', _search);
+  pradm.on("change", '.types', _search);
   //pradm.on("click", '#options', function(e) { e.preventDefault(); pradm.toggle('.options'); });
 
   var _polls = undefined;
@@ -316,7 +316,7 @@ layout: supply
       } else {
         _search();
       }
-      pradm.listen('enter', '#resolver', _set_resolver);
+      pradm.on('enter', '#resolver', _set_resolver);
   
       setInterval(function() {
         _lastpoll = Date.now();
