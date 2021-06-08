@@ -299,6 +299,7 @@ layout: supply
       _search();
     }
   });
+  pradm.on('enter', '#resolver', _set_resolver);
 
   pradm.afterLogout = function() {
     window.location.reload();
@@ -316,7 +317,6 @@ layout: supply
       } else {
         _search();
       }
-      pradm.on('enter', '#resolver', _set_resolver);
   
       setInterval(function() {
         _lastpoll = Date.now();
