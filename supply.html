@@ -165,7 +165,8 @@ layout: supply
     pradm.each('.types', function(el) {
       if (pradm.checked(el)) qry += ' AND type:"' + pradm.get(el) + '"';
     });
-    if (pradm.checked('#onlyresolved') && pradm.get('#resolver')) qry += ' AND resolved:"' + pradm.get('#resolver') + '"';
+    var pr = pradm.get('#resolver');
+    if (pradm.checked('#onlyresolved') && pr) qry += ' AND resolved:"' + pr + '"';
     url += '?q=' + qry + '&sort=createdAt:desc&size=' + _size + (_from ? '&from=' + _from : '');
     if (_first) url += '&terms=status,title'; // could get others such as email. Title will be hidden, but still provided for filtering convenience from title links in results
     pradm.ajax(url, {
@@ -273,7 +274,7 @@ layout: supply
   });
   
   var _set_resolver = function(r) {
-    if (r === undefined) r = pradm.get('#resolver');
+    if (r === undefined || typeof r !== 'string') r = pradm.get('#resolver');
     if (r) {
       pradm.cookie('resolver', r);
       pradm.set('#resolver', r);
