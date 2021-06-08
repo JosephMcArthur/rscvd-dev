@@ -277,13 +277,9 @@ layout: supply
   
   var _set_resolver = function(r) {
     if (r === undefined || typeof r !== 'string') r = pradm.get('#resolver');
-    console.log(r);
     if (r) {
       pradm.cookie('resolver', r);
-      console.log(pradm.exists('#resolver'));
-      console.log('setting ' + r);
-      pradm.set('#resolver', r);
-      console.log('set');
+      setTimeout(function() { pradm.set('#resolver', r); }, 1000);
       pradm.show('.onlyresolved');
     } else {
       pradm.cookie('resolver', '');
