@@ -14,7 +14,7 @@ layout: supply
 </div>
 -->
 
-<div class="options" style="margin-top: 35px; margin-bottom: 5px;">
+<div class="options" style="display: none; margin-top: 5px; margin-bottom: 5px;">
   <p style="text-align:right; margin-bottom: -50px;"><a id="pradmLogout" href="#">Logout</a></p>
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
@@ -308,13 +308,14 @@ layout: supply
     if (!_doneafter) {
       _doneafter = true;
       //pradm.show('.requestresolver');
-      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
+      pradm.show('.options');
       var r = pradm.cookie('resolver');
       if (r) {
         _set_resolver(r);
       } else {
         _search();
       }
+      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
   
       setInterval(function() {
         _lastpoll = Date.now();
@@ -324,7 +325,9 @@ layout: supply
             _polls = res;
             pradm.each('.verifier', function(el) { _vd(el); });
             for (var r in _polls.new) {
-              if (!pradm.exists('#' + _polls.new[r]._id)) pradm.prepend('#results', _construct(_polls.new[r]));
+              if ( !pradm.exists('#' + _polls.new[r]._id) && (!pradm.get('#status') || pradm.get('#status') === _polls.new[r].status) && (!pradm.get('#title') || pradm.get('#title') === _polls.new[r].title) ) {
+                pradm.prepend('#results', _construct(_polls.new[r]));
+              }
             }
             for (var c in _polls.cancel) {
               if (pradm.exists('#' + _polls.cancel[c])) pradm.remove('#' + _polls.cancel[c]);
