@@ -95,7 +95,7 @@ layout: supply
       body += '<a target="_blank" href="https://scholar.google.com/scholar?q=' + encodeURIComponent(r.atitle ? r.atitle : r.title) + '">';
     }
     body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
-    var pr = pradm.get('#resolver');
+    var pr = pradm.cookie('resolver');
     if (pr) {
       if (r.resolved && r.resolved.indexOf(pr) !== -1) {
         var ru = '#';
