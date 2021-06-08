@@ -280,6 +280,7 @@ layout: supply
     console.log(r);
     if (r) {
       pradm.cookie('resolver', r);
+      console.log(pradm.exists('#resolver'));
       console.log('setting ' + r);
       pradm.set('#resolver', r);
       console.log('set');
