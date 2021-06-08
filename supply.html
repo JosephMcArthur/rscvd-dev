@@ -280,7 +280,9 @@ layout: supply
     console.log(r);
     if (r) {
       pradm.cookie('resolver', r);
+      console.log('setting ' + r);
       pradm.set('#resolver', r);
+      console.log('set');
       pradm.show('.onlyresolved');
     } else {
       pradm.cookie('resolver', '');
