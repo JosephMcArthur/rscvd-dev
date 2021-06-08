@@ -19,7 +19,7 @@ layout: supply
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
-    <span class="onlyresolved" style="display: none;">. <input type="checkbox" name="onlyresolved" id="onlyresolved"> Only show link-resolved items</span>
+    <span class="onlyresolved">. <input type="checkbox" name="onlyresolved" id="onlyresolved"> Only show link-resolved items</span>
   </p>
 
   <div id="filters">
@@ -60,6 +60,8 @@ layout: supply
 
 <script>
   /* global pradm */
+
+  pradm.hide('.onlyresolved');
 
   var _first = true;
   var _max = false;
@@ -275,6 +277,7 @@ layout: supply
   
   var _set_resolver = function(r) {
     if (r === undefined || typeof r !== 'string') r = pradm.get('#resolver');
+    console.log(r);
     if (r) {
       pradm.cookie('resolver', r);
       pradm.set('#resolver', r);
