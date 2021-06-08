@@ -8,19 +8,25 @@ layout: supply
   <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
 
+<!--
 <div class="controls" style="display: none; float: right;">
   <a id="options" href="#">Options</a>
 </div>
+-->
 
-<div class="options" style="display: none; margin-top: 35px; margin-bottom: 5px;">
+<div class="options" style="margin-top: 35px; margin-bottom: 5px;">
   <p style="text-align:right; margin-bottom: -50px;"><a id="pradmLogout" href="#">Logout</a></p>
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
+    <span class="onlyresolved" style="display: none;">. <input type="checkbox" name="onlyresolved" id="onlyresolved"> Only show link-resolved items</span>
   </p>
 
-  <div id="filters"></div>
+  <div id="filters">
+    <input type="text" name="resolver" id="resolver" class="_oab_form" placeholder="Link resolver URL" style="max-width: 24%; display: inline; height: 34px; padding: 0px 6px;">    
+  </div>
 
+  <!--
   <div class="requestresolver" style="display: none;">
     <p>
       If you are at an institution that has a link resolver, you can provide the URL for it here.
@@ -30,6 +36,7 @@ layout: supply
       <input type="checkbox" name="onlyresolved" id="onlyresolved"> Only show items available on your link resolver
     </p>
   </div>
+  -->
 
 </div>
 
@@ -176,7 +183,7 @@ layout: supply
               }
               if (f === 'status') fl += '<option>All</option>';
               fl += '</select>';
-              pradm.append('#filters', fl);
+              pradm.prepend('#filters', fl);
             }
           }
           pradm.hide('#title'); // only keeping it as a handy way to pick up filter acounts from result title link clicks - gets shown if a user clicks one
@@ -204,7 +211,7 @@ layout: supply
     _search();
   });
   pradm.listen("change", '.types', _search);
-  pradm.on("click", '#options', function(e) { e.preventDefault(); pradm.toggle('.options'); });
+  //pradm.on("click", '#options', function(e) { e.preventDefault(); pradm.toggle('.options'); });
 
   var _polls = undefined;
   var _lastpoll = Date.now();
@@ -300,7 +307,7 @@ layout: supply
     pradm.hide('#login');
     if (!_doneafter) {
       _doneafter = true;
-      pradm.show('.requestresolver');
+      //pradm.show('.requestresolver');
       pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
       var r = pradm.cookie('resolver');
       if (r) {
