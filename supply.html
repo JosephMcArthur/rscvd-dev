@@ -273,6 +273,7 @@ layout: supply
   });
   
   var _set_resolver = function(r) {
+    if (r === undefined) r = pradm.get('#resolver');
     if (r) {
       pradm.cookie('resolver', r);
       pradm.set('#resolver', r);
@@ -315,7 +316,7 @@ layout: supply
       } else {
         _search();
       }
-      pradm.listen('enter', '#resolver', function() { _set_resolver(pradm.get('#resolver')); });
+      pradm.listen('enter', '#resolver', _set_resolver);
   
       setInterval(function() {
         _lastpoll = Date.now();
