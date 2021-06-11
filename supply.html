@@ -96,7 +96,7 @@ layout: supply
     }
     body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
     var pr = pradm.cookie('resolver');
-    if (pr) {
+    if (false) { //pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
       if (r.resolved && r.resolved.join(',').toLowerCase().indexOf(pr) !== -1 && r.resolves) {
         var ru = '';
