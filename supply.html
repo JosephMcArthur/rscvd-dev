@@ -98,6 +98,9 @@ layout: supply
     var pr = pradm.cookie('resolver');
     if (pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
+      console.log(r.resolved)
+      console.log(r.resolved.join(',').toLowerCase().indexOf(pr))
+      console.log(r.resolves)
       if (r.resolved && r.resolved.join(',').toLowerCase().indexOf(pr) !== -1 && r.resolves) {
         /*var ru = '';
         for (var rs in r.resolves) {
