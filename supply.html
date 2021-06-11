@@ -95,24 +95,6 @@ layout: supply
       body += '<a target="_blank" href="https://scholar.google.com/scholar?q=' + encodeURIComponent(r.atitle ? r.atitle : r.title) + '">';
     }
     body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
-    var pr = pradm.cookie('resolver');
-    if (pr) {
-      pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
-      var ru = '';
-      if (r.resolves) {
-        for (var rs in r.resolves) {
-          if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase().indexOf(pr) !== -1) {
-            ru = r.resolves[rs].url;
-            break;
-          }
-        }
-      }
-      if (ru) {
-        body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
-      } else if ((typeof r.unresolved === 'string' && r.unresolved.toLowerCase().indexOf(pr) !== -1) || (Array.isArray(r.unresolved) && r.unresolved.join().toLowerCase().indexOf(pr) !== -1)) {
-        body += '<br><span style="color: red;">NOT AVAILABLE</span> on your link resolver';
-      }
-    }
     if (r.year || r.publisher || (r.title && r.atitle))
       body += '<br>' + (r.year ? r.year + ' ' : '') + (r.title && r.atitle ? '<i><a class="title" href="#">' + r.title + '</a></i>' + (r.publisher ? ', ' : '') : '') + (r.publisher ? r.publisher : '');
     if (r.volume || r.issue || r.pages)
@@ -129,6 +111,24 @@ layout: supply
     if (r['needed-by']) {
       body += '<br>Required by ' + r['needed-by'].split('-').reverse().join('/');
       if (r.reference) body += '<br>Ref: ' + r.reference;
+    }
+    var pr = pradm.cookie('resolver');
+    if (pr) {
+      pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
+      var ru = '';
+      if (r.resolves) {
+        for (var rs in r.resolves) {
+          if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase().indexOf(pr) !== -1) {
+            ru = r.resolves[rs].url;
+            break;
+          }
+        }
+      }
+      if (ru) {
+        body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your resolver';
+      } else if ((typeof r.unresolved === 'string' && r.unresolved.toLowerCase().indexOf(pr) !== -1) || (Array.isArray(r.unresolved) && r.unresolved.join().toLowerCase().indexOf(pr) !== -1)) {
+        body += '<br><span style="color: red;">UNAVAILABLE</span> on your resolver';
+      }
     }
     if (r.status === 'Overdue' || r.status === 'Cancelled') {
       body += '<br><b>' + r.status + '</b>';
