@@ -19,7 +19,7 @@ layout: supply
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
-    <span class="onlyresolved">. <input type="checkbox" name="onlyresolved" id="onlyresolved"> Only show link-resolved items</span>
+    <span class="onlyresolved">.&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="onlyresolved" id="onlyresolved"> Only show link-resolved items</span>
   </p>
 
   <div id="filters">
@@ -100,7 +100,7 @@ layout: supply
       if (r.resolved && r.resolved.indexOf(pr) !== -1) {
         var ru = '#';
         for (var rs in r.resolves) {
-          if (r.resolves[rs].resolver === pr) ru = r.resolves.url;
+          if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase() === pr.split('?')[0].replace(/\/$/,'').toLowerCase()) ru = r.resolves.url;
         }
         body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
       } else if (r.unresolved && r.unresolved.indexOf(pr) !== -1) {
