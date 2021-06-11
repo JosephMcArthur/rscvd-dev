@@ -97,13 +97,14 @@ layout: supply
     body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
     var pr = pradm.cookie('resolver');
     if (pr) {
-      if (r.resolved && r.resolved.indexOf(pr) !== -1) {
+      pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
+      if (r.resolved && r.resolved.toLowerCase().indexOf(pr) !== -1) {
         var ru = '#';
         for (var rs in r.resolves) {
-          if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase() === pr.split('?')[0].replace(/\/$/,'').toLowerCase()) ru = r.resolves.url;
+          if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase() === pr) ru = r.resolves.url;
         }
         body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
-      } else if (r.unresolved && r.unresolved.indexOf(pr) !== -1) {
+      } else if (r.unresolved && r.unresolved.toLowerCase().indexOf(pr) !== -1) {
         body += '<br><span style="color: red;">NOT AVAILABLE</span> on your link resolver';
       }
     }
