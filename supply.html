@@ -98,13 +98,13 @@ layout: supply
     var pr = pradm.cookie('resolver');
     if (pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
-      if (r.resolved && r.resolved.toLowerCase().indexOf(pr) !== -1) {
+      if (r.resolved && r.resolved.join(',').toLowerCase().indexOf(pr) !== -1) {
         var ru = '#';
         for (var rs in r.resolves) {
           if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase() === pr) ru = r.resolves.url;
         }
         body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
-      } else if (r.unresolved && r.unresolved.toLowerCase().indexOf(pr) !== -1) {
+      } else if (r.unresolved && r.unresolved.join(',').toLowerCase().indexOf(pr) !== -1) {
         body += '<br><span style="color: red;">NOT AVAILABLE</span> on your link resolver';
       }
     }
