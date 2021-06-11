@@ -163,9 +163,9 @@ layout: supply
     pradm.show('.pradmLoading');
     var url = '/svc/rscvd';
     var email = pradm.get('#email');
-    var qry = 'email:' + (email ? '"' + email + '"' : '*');
+    var qry = 'email:' + (email ? '"' + encodeURIComponent(email) + '"' : '*');
     var title = pradm.get('#title');
-    qry += ' AND ' + (title ? 'title.keyword:"' + title + '"' : '(title:* OR atitle:*)');
+    qry += ' AND ' + (title ? 'title.keyword:"' + encodeURIComponent(title) + '"' : '(title:* OR atitle:*)');
     var status = pradm.get('#status');
     if (status !== 'All') {
       qry += ' AND ' + (status ? 'status:"' + status + '"' : '(status:"Awaiting verification" OR status:"Verified" OR status:"In progress" OR status:"Awaiting Peter")');
@@ -174,7 +174,7 @@ layout: supply
       if (pradm.checked(el)) qry += ' AND type:"' + pradm.get(el) + '"';
     });
     var pr = pradm.get('#resolver');
-    if (pradm.checked('#onlyresolved') && pr) qry += ' AND resolved:"' + pr + '"';
+    if (pradm.checked('#onlyresolved') && pr) qry += ' AND resolved:"' + encodeURIComponent(pr) + '"';
     url += '?q=' + qry + '&sort=createdAt:desc&size=' + _size + (_from ? '&from=' + _from : '');
     if (_first) url += '&terms=status,title'; // could get others such as email. Title will be hidden, but still provided for filtering convenience from title links in results
     pradm.ajax(url, {
@@ -299,7 +299,7 @@ layout: supply
     if (pradm.checked('#onlyresolved')) {
       pradm.html('#results', '');
       pradm.show('.pradmLoading');
-      pradm.ajax('/svc/rscvd/resolves?resolver=' + pradm.get('#resolver'), {
+      pradm.ajax('/svc/rscvd/resolves?resolver=' + encodeURIComponent(pradm.get('#resolver')), {
         success: function() {
           _search();
         }
