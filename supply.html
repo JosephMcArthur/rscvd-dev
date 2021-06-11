@@ -98,16 +98,18 @@ layout: supply
     var pr = pradm.cookie('resolver');
     if (pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
-      if (r.resolved && typeof r.resolved === 'string') r.resolved = [r.resolved];
-      if (r.unresolved && typeof r.unresolved === 'string') r.unresolved = [r.unresolved];
-      if (r.resolved && r.resolved.join(',').toLowerCase().indexOf(pr) !== -1 && r.resolves) {
-        var ru = '';
+      var ru = '';
+      if (r.resolves) {
         for (var rs in r.resolves) {
-          if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase() === pr) ru = r.resolves[rs].url;
-          break;
+          if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase().indexOf(pr) !== -1) {
+            ru = r.resolves[rs].url;
+            break;
+          }
         }
-        if (ru) body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
-      } else if (r.unresolved && r.unresolved.join(',').toLowerCase().indexOf(pr) !== -1) {
+      }
+      if (ru) {
+        body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
+      } else if ((typeof r.unresolved === 'string' && r.unresolved.toLowerCase().indexOf(pr) !== -1) || (Array.isArray(r.unresolved) && r.unresolved.join().toLowerCase().indexOf(pr) !== -1)) {
         body += '<br><span style="color: red;">NOT AVAILABLE</span> on your link resolver';
       }
     }
