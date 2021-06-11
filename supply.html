@@ -96,9 +96,10 @@ layout: supply
     }
     body += '<b>' + (r.atitle ? r.atitle : r.title) + '</b>' + (needsa ? '</a>' : '');
     var pr = pradm.cookie('resolver');
-    if (false) { //pr) {
+    if (pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
-      if (r.resolved && r.resolved.join(',').toLowerCase().indexOf(pr) !== -1 && r.resolves) {
+      console.log(pr)
+      /*if (r.resolved && r.resolved.join(',').toLowerCase().indexOf(pr) !== -1 && r.resolves) {
         var ru = '';
         for (var rs in r.resolves) {
           if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase() === pr) ru = r.resolves[rs].url;
@@ -107,7 +108,7 @@ layout: supply
         if (ru) body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
       } else if (r.unresolved && r.unresolved.join(',').toLowerCase().indexOf(pr) !== -1) {
         body += '<br><span style="color: red;">NOT AVAILABLE</span> on your link resolver';
-      }
+      }*/
     }
     if (r.year || r.publisher || (r.title && r.atitle))
       body += '<br>' + (r.year ? r.year + ' ' : '') + (r.title && r.atitle ? '<i><a class="title" href="#">' + r.title + '</a></i>' + (r.publisher ? ', ' : '') : '') + (r.publisher ? r.publisher : '');
