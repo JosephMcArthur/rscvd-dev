@@ -98,7 +98,6 @@ layout: supply
     var pr = pradm.cookie('resolver');
     if (pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
-      console.log(pr)
       var ru = '';
       if (r.resolves) {
         for (var rs in r.resolves) {
@@ -109,12 +108,11 @@ layout: supply
           }
         }
       }
-      console.log(ru)
-      /*if (ru) {
+      if (ru) {
         body += '<br><a target="_blank" style="color: green" href="' + ru + '">AVAILABLE</a> on your link resolver';
       } else if ((typeof r.unresolved === 'string' && r.unresolved.toLowerCase().indexOf(pr) !== -1) || (Array.isArray(r.unresolved) && r.unresolved.join().toLowerCase().indexOf(pr) !== -1)) {
         body += '<br><span style="color: red;">NOT AVAILABLE</span> on your link resolver';
-      }*/
+      }
     }
     if (r.year || r.publisher || (r.title && r.atitle))
       body += '<br>' + (r.year ? r.year + ' ' : '') + (r.title && r.atitle ? '<i><a class="title" href="#">' + r.title + '</a></i>' + (r.publisher ? ', ' : '') : '') + (r.publisher ? r.publisher : '');
