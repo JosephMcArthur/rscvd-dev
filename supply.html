@@ -74,7 +74,7 @@ layout: supply
       r = r._source;
       if (!r._id) r._id = rid;
     }
-    for ( var k in r ) r[k] = decodeURIComponent(r[k]); // clean up for old test data
+    //for ( var k in r ) r[k] = decodeURIComponent(r[k]); // clean up for old test data
     var body = '<tr id="' + r._id + '"><td>';
     var needsa = false;
     if (typeof r.doi === 'number') r.doi = r.doi.toString();
