@@ -100,6 +100,8 @@ layout: supply
     if (pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
       console.log(r.resolved)
+      console.log(typeof r.resolved)
+      console.log(r.resolved.join())
       console.log(r.resolved.join(',').toLowerCase().indexOf(pr))
       console.log(r.resolves)
       console.log(r.unresolved)
