@@ -101,7 +101,6 @@ layout: supply
       var ru = '';
       if (r.resolves) {
         for (var rs in r.resolves) {
-          console.log(r.resolves[rs])
           if (r.resolves[rs].resolver.split('?')[0].replace(/\/$/,'').toLowerCase().indexOf(pr) !== -1) {
             ru = r.resolves[rs].url;
             break;
