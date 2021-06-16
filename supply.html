@@ -8,12 +8,6 @@ layout: supply
   <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
 
-<!--
-<div class="controls" style="display: none; float: right;">
-  <a id="options" href="#">Options</a>
-</div>
--->
-
 <div class="options" style="display: none; margin-top: 5px; margin-bottom: 5px;">
   <p style="text-align:right; margin-bottom: -50px;"><a id="pradmLogout" href="#">Logout</a></p>
   <p>
@@ -25,18 +19,6 @@ layout: supply
   <div id="filters">
     <input type="text" name="resolver" id="resolver" class="_oab_form" placeholder="Link resolver URL (then press enter)" style="max-width: 24%; display: inline; height: 34px; padding: 0px 6px;">    
   </div>
-
-  <!--
-  <div class="requestresolver" style="display: none;">
-    <p>
-      If you are at an institution that has a link resolver, you can provide the URL for it here.
-      <input type="text" name="resolver" id="resolver" class="_oab_form" placeholder="Type your resolver URL here then press enter" style="height: 34px; padding: 0px 6px;">
-    </p>
-    <p class="onlyresolved" style="display: none;">
-      <input type="checkbox" name="onlyresolved" id="onlyresolved"> Only show items available on your link resolver
-    </p>
-  </div>
-  -->
 
 </div>
 
@@ -50,13 +32,13 @@ layout: supply
 
 
 <script>
-  window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bgb.lvatn.com' : 'https://paradigm.oa.works';
+  window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
   window.pradm = {};
   window.pradm.api = window.api;
 </script>
 
-<script src="https://bgb.lvatn.com/client/pradm.js"></script>
-<script src="https://bgb.lvatn.com/client/pradmLogin.js"></script>
+<script src="https://bg.beta.lvatn.com/client/pradm.js"></script>
+<script src="https://bg.beta.lvatn.com/client/pradmLogin.js"></script>
 
 <script>
   /* global pradm */
