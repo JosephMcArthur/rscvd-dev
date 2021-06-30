@@ -6,21 +6,17 @@ layout: default
 
 <p id="cancelling" style="display: none;">Cancelling...</p>
 
-<script>
-  window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bgb.lvatn.com' : 'https://paradigm.oa.works';
-  window.pradm = {};
-  window.pradm.api = window.api;
-</script>
-
-<script src="https://bgb.lvatn.com/client/pradm.js"></script>
+<script src="https://bgb.lvatn.com/client/pradm.min.js"></script>
 
 <script>
-  var rid = pradm.params('id');
+  var api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
+
+  var rid = P.params('id');
   if (rid) {
-    pradm.show('#cancelling');
-    pradm.ajax('/svc/rscvd/cancel/' + rid, {
+    P.show('#cancelling');
+    P.ajax(api + '/svc/rscvd/cancel/' + rid, {
       success: function(rec) {
-        pradm.html('#cancelling', 'Your request for ' + (rec.atitle ? rec.atitle : (rec.title ? rec.title : rid)) + ' has been cancelled.');
+        P.html('#cancelling', 'Your request for ' + (rec.atitle ? rec.atitle : (rec.title ? rec.title : rid)) + ' has been cancelled.');
       }
     });
   }

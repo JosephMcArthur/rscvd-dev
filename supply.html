@@ -4,12 +4,12 @@ layout: supply
 
 <div id="login" style="display: none;">
   <p>Please type your email address below then press enter to begin login. Once you receive the token number that will be emailed to you, enter it below to continue.</p>
-  <input autofocus id="pradmEmail" class="pradmEmail _oab_form" type="text" name="email" placeholder="email (then press enter)">
-  <input id="pradmToken" class="pradmToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
+  <input autofocus id="PEmail" class="PEmail _oab_form" type="text" name="email" placeholder="email (then press enter)">
+  <input id="PToken" class="PToken _oab_form" style="display:none;" type="text" name="token" placeholder="token (check your email)">
 </div>
 
 <div class="options" style="display: none; margin-top: 5px; margin-bottom: 5px;">
-  <p style="text-align:right; margin-bottom: -50px;"><a id="pradmLogout" href="#">Logout</a></p>
+  <p style="text-align:right; margin-bottom: -50px;"><a id="PLogout" href="#">Logout</a></p>
   <p>
     Show <input type="radio" name="types" class="types" value="book"> books
     or <input type="radio" name="types" class="types" value="paper"> papers
@@ -27,23 +27,20 @@ layout: supply
   <tbody id="results"></tbody>
 </table>
 
-<div class="pradmLoading" style="display: none;">Loading...</div>
-
-
+<div class="PLoading" style="display: none;">Loading...</div>
 
 <script>
   window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
-  window.pradm = {};
-  window.pradm.api = window.api;
 </script>
 
-<script src="https://bg.beta.lvatn.com/client/pradm.js"></script>
-<script src="https://bg.beta.lvatn.com/client/pradmLogin.js"></script>
+<script src="https://bg.beta.lvatn.com/client/pradm.min.js"></script>
+<script src="https://bg.beta.lvatn.com/client/pradmLogin.min.js"></script>
 
 <script>
-  /* global pradm */
+  /* global P */
+  var api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
 
-  pradm.hide('.onlyresolved');
+  P.hide('.onlyresolved');
 
   var _first = true;
   var _max = false;
@@ -94,7 +91,7 @@ layout: supply
       body += '<br>Required by ' + r['needed-by'].split('-').reverse().join('/');
       if (r.reference) body += '<br>Ref: ' + r.reference;
     }
-    var pr = pradm.cookie('resolver');
+    var pr = P.cookie('resolver');
     if (pr) {
       pr = pr.split('?')[0].replace(/\/$/,'').toLowerCase();
       var ru = '';
@@ -140,29 +137,29 @@ layout: supply
     if (!_paging) {
       _max = false;
       _from = 0;
-      pradm.html('#results', '');
+      P.html('#results', '');
     }
-    pradm.show('.pradmLoading');
-    var url = '/svc/rscvd';
-    var email = pradm.get('#email');
+    P.show('.PLoading');
+    var url = api + '/svc/rscvd';
+    var email = P.val('#email');
     var qry = 'email:' + (email ? '"' + encodeURIComponent(email) + '"' : '*');
-    var title = pradm.get('#title');
+    var title = P.val('#title');
     qry += ' AND ' + (title ? 'title.keyword:"' + encodeURIComponent(title) + '"' : '(title:* OR atitle:*)');
-    var status = pradm.get('#status');
+    var status = P.val('#status');
     if (status !== 'All') {
       qry += ' AND ' + (status ? 'status:"' + status + '"' : '(status:"Awaiting verification" OR status:"Verified" OR status:"In progress" OR status:"Awaiting Peter")');
     }
-    pradm.each('.types', function(el) {
-      if (pradm.checked(el)) qry += ' AND type:"' + pradm.get(el) + '"';
+    P.each('.types', function(el) {
+      if (P.checked(el)) qry += ' AND type:"' + P.val(el) + '"';
     });
-    var pr = pradm.get('#resolver');
-    if (pradm.checked('#onlyresolved') && pr) qry += ' AND resolved:"' + encodeURIComponent(pr) + '"';
+    var pr = P.val('#resolver');
+    if (P.checked('#onlyresolved') && pr) qry += ' AND resolved:"' + encodeURIComponent(pr) + '"';
     url += '?q=' + qry + '&sort=createdAt:desc&size=' + _size + (_from ? '&from=' + _from : '');
     if (_first) url += '&terms=status,title'; // could get others such as email. Title will be hidden, but still provided for filtering convenience from title links in results
-    pradm.ajax(url, {
+    P.ajax(url, {
       success: function(res) {
         if (res.hits.hits.length < _size) _max = true;
-        for (var h in res.hits.hits) pradm.append('#results', _construct(res.hits.hits[h]));
+        for (var h in res.hits.hits) P.append('#results', _construct(res.hits.hits[h]));
         
         if (_first) {
           _first = false;
@@ -174,13 +171,13 @@ layout: supply
               }
               if (f === 'status') fl += '<option>All</option>';
               fl += '</select>';
-              pradm.prepend('#filters', fl);
+              P.prepend('#filters', fl);
             }
           }
-          pradm.hide('#title'); // only keeping it as a handy way to pick up filter acounts from result title link clicks - gets shown if a user clicks one
-          pradm.show('.controls');
+          P.hide('#title'); // only keeping it as a handy way to pick up filter acounts from result title link clicks - gets shown if a user clicks one
+          P.show('.controls');
         }
-        pradm.hide('.pradmLoading');
+        P.hide('.PLoading');
         _paging = false;
         //window.history.pushState("", "", window.location.pathname + (q !== '' ? "?q=" + q : ''));
       }
@@ -194,22 +191,22 @@ layout: supply
       _search();
     }
   });
-  pradm.on("change", '.filter', _search);
-  pradm.on("click", ".title", function(e) {
+  P.on("change", '.filter', _search);
+  P.on("click", ".title", function(e) {
     e.preventDefault();
-    pradm.set('#title', e.target.innerHTML);
-    pradm.show('#title');
+    P.set('#title', e.target.innerHTML);
+    P.show('#title');
     _search();
   });
-  pradm.on("change", '.types', _search);
-  //pradm.on("click", '#options', function(e) { e.preventDefault(); pradm.toggle('.options'); });
+  P.on("change", '.types', _search);
+  //P.on("click", '#options', function(e) { e.preventDefault(); P.toggle('.options'); });
 
   var _polls = undefined;
   var _lastpoll = Date.now();
 
   var _vd = function(el, email, deny) {
     if (!email) {
-      var ce = pradm.classes(el).pop();
+      var ce = P.classes(el).pop();
       if (_polls.verify.indexOf(ce) !== -1) {
         email = true;
       } else if (_polls.deny.indexOf(ce) !== -1) {
@@ -217,15 +214,15 @@ layout: supply
         deny = true;
       }
     }
-    if (email === true || (email && pradm.has(el, '.' + email))) {
-      pradm.hide(el);
-      var siblings = pradm.siblings(el);
+    if (email === true || (email && P.has(el, '.' + email))) {
+      P.hide(el);
+      var siblings = P.siblings(el);
       for ( var s in siblings) {
         var sibling = siblings[s];
-        if (pradm.has(sibling, 'verified')) {
-          pradm[deny ? 'hide' : 'show'](sibling);
-        } else if (pradm.has(sibling, 'denied')) {
-          pradm[deny ? 'show' : 'hide'](sibling);
+        if (P.has(sibling, 'verified')) {
+          P[deny ? 'hide' : 'show'](sibling);
+        } else if (P.has(sibling, 'denied')) {
+          P[deny ? 'show' : 'hide'](sibling);
         }
       }
     }
@@ -233,30 +230,30 @@ layout: supply
   
   var _state_hide = function(el) {
     if (['Done'].indexOf(el.value) !== -1) {
-      pradm.class(el.closest('tr'), 'alert');
+      P.class(el.closest('tr'), 'alert');
       setTimeout(function() {
-        pradm.remove(el.closest('tr'));
+        P.remove(el.closest('tr'));
       }, 500);
     }
   };
   
-  pradm.on("click", ".verify", function(e) {
+  P.on("click", ".verify", function(e) {
     e.preventDefault();
     var el = e.target;
-    var cls = pradm.classes(el);
+    var cls = P.classes(el);
     var deny = cls.indexOf("deny") !== -1;
-    pradm.html(el, (deny ? "Deny" : "Approv") + 'ing...');
+    P.html(el, (deny ? "Deny" : "Approv") + 'ing...');
     var email = cls.pop();
-    pradm.ajax('/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email + '?apikey=' + pradm.account.apikey, {
+    P.ajax(api + '/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email + '?apikey=' + P.account.apikey, {
       success: function(res) {
-        if (res) pradm.each('.verifier', function(el) { _vd(el, email, deny); });
+        if (res) P.each('.verifier', function(el) { _vd(el, email, deny); });
       }
     });
   });
-  pradm.on("change", ".status", function(e) {
+  P.on("change", ".status", function(e) {
     var el = e.target;
-    var cls = pradm.classes(el);
-    pradm.ajax('/svc/rscvd/status/' + cls.pop() + "/" + el.value + '?apikey=' + pradm.account.apikey, {
+    var cls = P.classes(el);
+    P.ajax(api + '/svc/rscvd/status/' + cls.pop() + "/" + el.value + '?apikey=' + P.account.apikey, {
       success: function(res) {
         if (res) _state_hide(el);
       }
@@ -264,24 +261,24 @@ layout: supply
   });
   
   var _set_resolver = function(r) {
-    if (r === undefined || typeof r !== 'string') r = pradm.get('#resolver');
+    if (r === undefined || typeof r !== 'string') r = P.val('#resolver');
     if (r) {
-      pradm.cookie('resolver', r);
-      setTimeout(function() { pradm.set('#resolver', r); }, 1000);
-      pradm.show('.onlyresolved');
+      P.cookie('resolver', r);
+      setTimeout(function() { P.set('#resolver', r); }, 1000);
+      P.show('.onlyresolved');
     } else {
-      pradm.cookie('resolver', '');
-      pradm.set('#resolver', '');
-      pradm.uncheck('#onlyresolved');
-      pradm.hide('.onlyresolved');
+      P.cookie('resolver', '');
+      P.set('#resolver', '');
+      P.uncheck('#onlyresolved');
+      P.hide('.onlyresolved');
     }
     _search();
   };
-  pradm.on('change', '#onlyresolved', function() {
-    if (pradm.checked('#onlyresolved')) {
-      pradm.html('#results', '');
-      pradm.show('.pradmLoading');
-      pradm.ajax('/svc/rscvd/resolves?resolver=' + encodeURIComponent(pradm.get('#resolver')), {
+  P.on('change', '#onlyresolved', function() {
+    if (P.checked('#onlyresolved')) {
+      P.html('#results', '');
+      P.show('.PLoading');
+      P.ajax(api + '/svc/rscvd/resolves?resolver=' + encodeURIComponent(P.val('#resolver')), {
         success: function() {
           _search();
         }
@@ -290,19 +287,19 @@ layout: supply
       _search();
     }
   });
-  pradm.on('enter', '#resolver', _set_resolver);
+  P.on('enter', '#resolver', _set_resolver);
 
-  pradm.afterLogout = function() {
+  P.afterLogout = function() {
     window.location.reload();
   };
   var _doneafter = false;
-  pradm.afterLogin = function() {
-    pradm.hide('#login');
+  P.afterLogin = function() {
+    P.hide('#login');
     if (!_doneafter) {
       _doneafter = true;
-      //pradm.show('.requestresolver');
-      pradm.show('.options');
-      var r = pradm.cookie('resolver');
+      //P.show('.requestresolver');
+      P.show('.options');
+      var r = P.cookie('resolver');
       if (r) {
         _set_resolver(r);
       } else {
@@ -311,23 +308,23 @@ layout: supply
   
       setInterval(function() {
         _lastpoll = Date.now();
-        var url = '/svc/rscvd/poll/' + (_lastpoll - 300000);
-        pradm.ajax(url, {
+        var url = api + '/svc/rscvd/poll/' + (_lastpoll - 300000);
+        P.ajax(url, {
           success: function(res) {
             _polls = res;
-            pradm.each('.verifier', function(el) { _vd(el); });
+            P.each('.verifier', function(el) { _vd(el); });
             for (var r in _polls.new) {
-              if ( !pradm.exists('#' + _polls.new[r]._id) && (!pradm.get('#status') || pradm.get('#status') === _polls.new[r].status) && (!pradm.get('#title') || pradm.get('#title') === _polls.new[r].title) ) {
-                pradm.prepend('#results', _construct(_polls.new[r]));
+              if ( !P('#' + _polls.new[r]._id) && (!P.val('#status') || P.val('#status') === _polls.new[r].status) && (!P.val('#title') || P.val('#title') === _polls.new[r].title) ) {
+                P.prepend('#results', _construct(_polls.new[r]));
               }
             }
             for (var c in _polls.cancel) {
-              if (pradm.exists('#' + _polls.cancel[c])) pradm.remove('#' + _polls.cancel[c]);
+              if (P('#' + _polls.cancel[c])) P.remove('#' + _polls.cancel[c]);
             }
             for ( var s in _polls.status ) {
-              var el = pradm.exists('.' + s);
-              if (el && pradm.has(el, '.status') && pradm.val(el) !== res.status[s]) {
-                pradm.set(el, res.status[s]);
+              var el = P('.' + s);
+              if (el && P.has(el, '.status') && P.val(el) !== res.status[s]) {
+                P.set(el, res.status[s]);
                 _state_hide(el);
               }
             }
@@ -336,10 +333,10 @@ layout: supply
       }, 10000);
     }
   };
-  if (pradm.loggedin()) {
-    pradm.afterLogin();
+  if (P.loggedin()) {
+    P.afterLogin();
   } else {
-    pradm.show('#login');
+    P.show('#login');
   }
 
 </script>
