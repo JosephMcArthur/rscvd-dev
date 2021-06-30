@@ -78,7 +78,8 @@ layout: default
 </form>
 
 <script>
-P.edit({url: 'https://bg.beta.lvatn.com/svc/rscvd/form'});
+var api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
+P.edit({url: api + '/svc/rscvd/form'});
 
 var today = new Date();
 var dd = today.getDate();
