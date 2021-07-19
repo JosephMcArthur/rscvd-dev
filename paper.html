@@ -2,9 +2,6 @@
 layout: default
 ---
 
-<script src="https://bg.beta.lvatn.com/client/pradm.min.js"></script>
-<script src="https://bg.beta.lvatn.com/client/pradmEdit.min.js"></script>
-
 <h1>Paper Request</h1>
 
 <form id="submission">
@@ -78,7 +75,6 @@ layout: default
 </form>
 
 <script>
-var api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
 P.edit({url: api + '/svc/rscvd/form'});
 
 var today = new Date();

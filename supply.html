@@ -1,6 +1,13 @@
 ---
-layout: supply
+layout: default
 ---
+
+<style>
+#main_content.inner {
+  max-width: 1200px !important; 
+  margin: 0 auto 0 auto !important;
+}
+</style>
 
 <div id="login" style="display: none;">
   <p>Please type your email address below then press enter to begin login. Once you receive the token number that will be emailed to you, enter it below to continue.</p>
@@ -30,14 +37,10 @@ layout: supply
 <div class="PLoading" style="display: none;">Loading...</div>
 
 <script>
-  window.api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
-</script>
-
-<script src="https://bg.beta.lvatn.com/client/pradm.min.js"></script>
-<script src="https://bg.beta.lvatn.com/client/pradmLogin.min.js"></script>
-
-<script>
   /* global P */
+
+  P.html('#project_title', 'Supply');
+  P.hide('#project_tagline');
 
   P.hide('.onlyresolved');
 

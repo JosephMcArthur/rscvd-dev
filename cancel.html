@@ -6,11 +6,7 @@ layout: default
 
 <p id="cancelling" style="display: none;">Cancelling...</p>
 
-<script src="https://bg.beta.lvatn.com/client/pradm.min.js"></script>
-
 <script>
-  var api = window.location.host.indexOf('dev.') === 0 ? 'https://bg.beta.lvatn.com' : 'https://paradigm.oa.works';
-
   var rid = P.params('id');
   if (rid) {
     P.show('#cancelling');
