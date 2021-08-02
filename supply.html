@@ -246,20 +246,28 @@ layout: default
     var deny = cls.indexOf("deny") !== -1;
     P.html(el, (deny ? "Deny" : "Approv") + 'ing...');
     var email = cls.pop();
-    P.ajax(api + '/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email + '?apikey=' + P.account.apikey, {
-      success: function(res) {
-        if (res) P.each('.verifier', function(el) { _vd(el, email, deny); });
-      }
-    });
+    try {
+      P.ajax(api + '/svc/rscvd/' + (deny ? "deny" : "verify") + "/" + email + '?apikey=' + P.account.apikey, {
+        success: function(res) {
+          if (res) P.each('.verifier', function(el) { _vd(el, email, deny); });
+        }
+      });
+    } catch(err) {
+      alert('Sorry, you may need to refresh the page, logout, and login again.');
+    }
   });
   P.on("change", ".status", function(e) {
     var el = e.target;
     var cls = P.classes(el);
-    P.ajax(api + '/svc/rscvd/status/' + cls.pop() + "/" + el.value + '?apikey=' + P.account.apikey, {
-      success: function(res) {
-        if (res) _state_hide(el);
-      }
-    });
+    try {
+      P.ajax(api + '/svc/rscvd/status/' + cls.pop() + "/" + el.value + '?apikey=' + P.account.apikey, {
+        success: function(res) {
+          if (res) _state_hide(el);
+        }
+      });
+    } catch(err) {
+      alert('Sorry, you may need to refresh the page, logout, and login again.');
+    }
   });
   
   var _set_resolver = function(r) {
