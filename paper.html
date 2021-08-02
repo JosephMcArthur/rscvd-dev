@@ -82,4 +82,11 @@ var dd = today.getDate();
 var mm = today.getMonth() + 1;
 var yyyy = today.getFullYear();
 document.getElementById("needed-by").setAttribute("min", yyyy + '-' + (mm < 10 ? 0 : '') + mm + '-' + (dd < 10 ? 0 : '') + dd);
+
+// the old way this worked was setting these settings:
+// sid = 'AKfycbwFA_R-0gjzVS9029ByVpduCYJbHLH0ujstNng1aNnRogw1htU';
+// url = 'https://api.openaccessbutton.org/ill/collect/' + sid;
+// fields = [];
+// then doing a template include for the form html include
+
 </script>
